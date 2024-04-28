@@ -1,0 +1,281 @@
+﻿@* 
+    Componente Razor per una tabella qualunque con opzioni di modifica, eliminazione, aggiunta e selezione di riga. 
+*@
+
+@* Commentato perché è un componente che non dev'essere accessibile dall'utente.*@
+@page "/DataGrid" 
+
+@using System.Reflection;
+@using System.ComponentModel;
+
+@typeparam T
+
+@CreaDataGrid()
+
+@code {
+    // TODO: Dovreste mettere anche tutti i nomi in inglese per renderlo davvero generale!
+
+    private string[] _columnNames { get; set; }
+    private string[] _propertyNames { get; set; }
+    
+    [Parameter]
+    public List<T> Rows { get; set; }
+    
+    [Parameter]
+    public EventCallback<T> OnDelete { get; set; }
+    
+    [Parameter]
+    public EventCallback<T> OnAdd { get; set; }
+
+    [Parameter]
+    public EventCallback<T> OnSave { get; set; }
+
+    [Parameter]
+    public EventCallback<T> OnRowSelected { get; set; }
+
+    private Dictionary<T, bool> EditingStates { get; set; } = new Dictionary<T, bool>();
+
+    public bool isARowSelected = false;
+    
+    public T newRecord;
+    public T selectedRecord;
+    
+    private T previousValue = default(T);
+
+    private RenderFragment CreaDataGrid()
+    {
+        return builder =>
+        {
+            // Determina i nomi delle colonne della tabella, possono contenere spazi.
+            _columnNames = typeof(T)
+                .GetProperties()
+                .Select(x => x.GetCustomAttribute<DisplayNameAttribute>()?.DisplayName ?? x.Name) // LinQ
+                .ToArray(); // Metto il risultato della query LinQ in un Array
+
+            // Nomi delle proprietà di T.
+            _propertyNames = typeof(T)
+                .GetProperties()
+                .Select(x => x.Name) // Prende il nome di ogni proprietà
+                .ToArray(); // Per poi restituirli come array
+                
+            int indiceSequenza = 0; // L'indice serve internamente a Blazor per capire per ogni metodo quale 
+                                    // tag è stato aperto per ultimo
+
+            builder.OpenElement(indiceSequenza++, "div");
+            builder.AddAttribute(indiceSequenza++, "class", "table-responsive-sm");
+            builder.OpenElement(indiceSequenza++, "table");
+            builder.AddAttribute(indiceSequenza++, "class", "table table-bordered table-striped table-hover");
+            builder.OpenElement(indiceSequenza++, "thead");
+            builder.AddAttribute(indiceSequenza++, "class", "table-dark");
+            builder.OpenElement(indiceSequenza++, "tr");
+
+            // Aggiunta di stile per sfondo dell'intestazione
+            // builder.AddAttribute(indiceSequenza++, "style", "background-color: #f8f9fa; font-weight: bold;");
+
+            foreach (string nc in _columnNames)
+            {
+                builder.OpenElement(indiceSequenza++, "th");
+                builder.AddContent(indiceSequenza++, nc);
+                builder.CloseElement();
+            }
+
+            builder.OpenElement(indiceSequenza++, "th");
+
+            builder.AddContent(indiceSequenza++, "Azioni");
+            builder.CloseElement(); // th
+            builder.CloseElement(); // tr
+            builder.CloseElement(); // thead
+            builder.OpenElement(10, "tbody");
+            foreach (var e in Rows)
+            {
+                builder.OpenElement(indiceSequenza++, "tr");
+                // Gestione della selezione di una riga.
+                builder.AddAttribute(indiceSequenza++, "onclick", EventCallback.Factory.Create(
+                    this, () =>
+                    {
+                        selectedRecord = e;
+                        isARowSelected = true;
+                        OnRowSelected.InvokeAsync(e);
+                    })
+                );
+
+                if (isARowSelected && e.Equals(selectedRecord))
+                    builder.AddAttribute(indiceSequenza++, "class", "table-primary");
+
+                foreach (var nomeProp in _propertyNames)
+                {
+                    // Restituisce un oggetto di tipo PropertyInfo.
+                    // Questo può essere usato per leggere la proprietà di uno
+                    // specifico oggetto di quel tipo
+                    // prop.GetValue(oggetto)
+                    // o per assegnarle un valore
+                    // prop.SetValue(istanza, nuovoValore);
+                    // definite dalla versione .NET Core 3.1.
+                    var prop = typeof(T).GetProperty(nomeProp);
+                    builder.OpenElement(indiceSequenza++, "td");
+
+                    // Aggiunta di stili per troncare il contenuto.
+                    // Mostra "..." se tronca.
+                    builder.AddAttribute(indiceSequenza++, "class", "text-truncate");
+                    builder.AddAttribute(indiceSequenza++, "style", "max-width: 100px;");
+
+                    if (EditingStates.ContainsKey(e) && EditingStates[e])
+                    {
+                        // Casella di testo per la modifica.
+                        builder.OpenElement(indiceSequenza++, "input");
+                        builder.AddAttribute(indiceSequenza++, "value",
+                        prop?.GetValue(e)?.ToString() ?? "");
+                        builder.AddAttribute(indiceSequenza++,
+                            "oninput", EventCallback.Factory.Create(this,
+                                (ChangeEventArgs args) =>
+                                {
+                                    var valore = args.Value?.ToString();
+                                    prop?.SetValue(e, Convert.ChangeType(valore, prop.PropertyType));
+                                })
+                        );
+                        builder.CloseElement();
+                    }
+
+                    else
+                    {
+                        // Visualizzazione del valore.
+                        builder.AddContent(indiceSequenza++, prop.GetValue(e)?.ToString() ?? "");
+                    }
+                    builder.CloseElement(); // td
+                }
+                // Pulsanti per azioni.
+                builder.OpenElement(indiceSequenza++, "td");
+
+                if (EditingStates.ContainsKey(e) && EditingStates[e])
+                {
+                    // Pulsante Salva.
+                    builder.OpenElement(indiceSequenza++, "button");
+                    builder.AddAttribute(indiceSequenza++, "class", "btn btn-success btn-sm");
+                    builder.AddAttribute(indiceSequenza++, "onclick", 
+                        EventCallback.Factory.Create(this, () =>
+                            {
+                                OnSave.InvokeAsync(e);
+                                ToggleEditingState(e);
+                            }
+                        )
+                    );
+                    builder.AddContent(indiceSequenza++, "Salva");
+                    builder.CloseElement();
+
+                    // Separa i due pulsanti.
+                    // Funziona anche se lo mette tra apici.
+                    builder.AddMarkupContent(indiceSequenza++, "&nbsp;&nbsp;");
+                    
+                    // Oppure:
+                    // builder.AddMarkupContent(indiceSequenza++, "<span style=\"margin-right: 10px;\"></span>");
+
+                    // Pulsante Annulla.
+                    builder.OpenElement(indiceSequenza++, "button");
+                    builder.AddAttribute(indiceSequenza++, "class", "btn btn-warning btn-sm");
+                    builder.AddAttribute(indiceSequenza++, "onclick", EventCallback.Factory.Create(this,
+                        () =>
+                        {
+                            MethodInfo mi = typeof(T).GetMethod("ShallowCopy");
+                            Rows[Rows.IndexOf(e)] = (T)mi.Invoke(previousValue, null);
+                            ToggleEditingState(e);
+                        }));
+                    builder.AddContent(indiceSequenza++, "Annulla");
+                    builder.CloseElement();
+                }
+                else
+                {
+                    // Pulsante Modifica.
+                    builder.OpenElement(indiceSequenza++, "button");
+                    builder.AddAttribute(indiceSequenza++, "class", "btn btn-primary btn-sm");
+                    builder.AddAttribute(indiceSequenza++,
+                        "onclick", EventCallback.Factory.Create(this,
+                            () => {
+                                MethodInfo mi = typeof(T).GetMethod("ShallowCopy");
+                                previousValue = (T)mi.Invoke(e, null);
+                                ToggleEditingState(e);
+                            })
+                        );
+                builder.AddContent(indiceSequenza++, "Modifica");
+                builder.CloseElement();
+                // Separa i due pulsanti: un solo spazio, altri come in HTML non sarebbero
+                // conteggiati.
+                builder.AddContent(indiceSequenza++, " ");
+                // Pulsante Elimina.
+                builder.OpenElement(indiceSequenza++, "button");
+                builder.AddAttribute(indiceSequenza++, "class", "btn btn-danger btn-sm");
+                builder.AddAttribute(indiceSequenza++,
+                "onclick", EventCallback.Factory.Create(this,
+                () =>
+                {
+                    Rows.Remove(Rows[Rows.IndexOf(e)]);
+                    OnDelete.InvokeAsync(e);
+                }));
+                    builder.AddContent(indiceSequenza++, "Elimina");
+                    builder.CloseElement();
+                }
+                builder.CloseElement(); // td
+                builder.CloseElement(); // tr
+            }
+            // Aggiunge nuova riga.
+            builder.OpenElement(indiceSequenza++, "tr");
+            foreach (var nomeProp in _propertyNames)
+            {
+                builder.OpenElement(indiceSequenza++, "td");
+                // Casella di testo per la nuova riga
+                builder.OpenElement(indiceSequenza++, "input");
+                builder.AddAttribute(indiceSequenza++,
+            "oninput", EventCallback.Factory.Create(this,
+            (ChangeEventArgs args) =>
+            {
+                // Alla prima modifica di un suo campo è creato il nuovo record.
+                var valore = args.Value?.ToString();
+                if (newRecord == null)
+                    // Senza questa assegnazione è null al primo cambiamento di un campo nuovo.
+                    newRecord = Activator.CreateInstance<T>();
+                typeof(T).GetProperty(nomeProp).SetValue(newRecord,
+            Convert.ChangeType(valore, typeof(T).GetProperty(nomeProp).PropertyType));
+            }));
+                builder.CloseElement(); // input
+                builder.CloseElement(); // td
+            }
+
+            // Pulsante Salva per la nuova riga.
+            builder.OpenElement(indiceSequenza++, "td");
+            builder.OpenElement(indiceSequenza++, "button");
+            builder.AddAttribute(indiceSequenza++, "class", "btn btn-success btn-sm");
+            builder.AddAttribute(indiceSequenza++, "onclick",
+                EventCallback.Factory.Create(this, () =>
+                {
+                    // Il record è diverso da null se, nella nuova riga,
+                    // è stato modificato almeno un campo. Torna null
+                    // tramite default(T) (non è possibile assegnargli null)
+                    // dopo il salvataggio effettuato qui.
+
+                    if (newRecord != null)
+                    {
+                        Rows.Add(newRecord);
+                        OnAdd.InvokeAsync(newRecord);
+                        newRecord = default(T);
+                    }
+                })
+            );
+            builder.AddContent(indiceSequenza++, "Salva");
+            builder.CloseElement(); // button
+            builder.CloseElement(); // td
+            builder.CloseElement(); // tr
+            builder.CloseElement(); // tbody
+            builder.CloseElement(); // table
+            builder.CloseElement(); // div
+        };
+    }
+    private void ToggleEditingState(T record)
+    {
+        if (EditingStates.ContainsKey(record))
+            EditingStates[record] = !EditingStates[record];
+        else
+            // Se il record non è già presente nelle chiavi lo inserisce,
+            // naturalmente facendolo partire con true perché se arriva
+            // qui è iniziato l'editing.
+            EditingStates[record] = true;
+    }
+}

@@ -1,0 +1,58 @@
+﻿@using System.Text.Json
+
+<div class="collapse navbar-collapse">
+
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/" Match=NavLinkMatch.All>Home</NavLink>
+        </li>
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/info">Informazioni</NavLink>
+        </li>
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/rilevazioni">Rilevazioni</NavLink>
+        </li>
+        <li class="nav-item">
+            <NavLink class="nav-link" href="/contatti">Contatti</NavLink>
+        </li>
+        <li class="nav-item dropdown">
+            <NavLink class="nav-link dropdown-toggle" href="/stazione-meteo" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Stazione Meteo</NavLink>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown">
+                    <NavLink href="/stazione-meteo/esterno" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Esterno</NavLink>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <NavLink class="dropdown-item nav-link" href="/stazione-meteo/esterno/anemometro">Anemometro</NavLink>
+                        <NavLink class="dropdown-item nav-link" href="/stazione-meteo/esterno/banderuola">Banderuola</NavLink>
+                        <NavLink class="dropdown-item nav-link" href="/stazione-meteo/esterno/picam">PiCam</NavLink>
+                        <NavLink class="dropdown-item nav-link" href="/stazione-meteo/esterno/protezione-igrometro">Igrometro e Termometro</NavLink>
+                        <NavLink class="dropdown-item nav-link" href="/stazione-meteo/esterno/pluviometro">Pluviometro</NavLink>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <NavLink href="/stazione-meteo/interno" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Interno</NavLink>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <NavLink class="dropdown-item  nav-link" href="/stazione-meteo/interno/antirimbalzo">Antirimbalzo</NavLink>
+                        <NavLink class="dropdown-item  nav-link" href="/stazione-meteo/interno/batteria-continuita">Batteria di continuità</NavLink>
+                        <NavLink class="dropdown-item  nav-link" href="/stazione-meteo/interno/picam">PiCam</NavLink>
+                        <NavLink class="dropdown-item  nav-link" href="/stazione-meteo/interno/raspberry">Raspberry</NavLink>
+                        <NavLink class="dropdown-item  nav-link" href="/stazione-meteo/interno/reg-ten-in">Regolatore tensione entrata</NavLink>
+                        <NavLink class="dropdown-item  nav-link" href="/stazione-meteo/interno/reg-ten-out">Regolatore tensione uscita</NavLink>
+                        <NavLink class="dropdown-item  nav-link" href="/stazione-meteo/interno/ups">UPS</NavLink>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <NavLink href="/stazione-meteo/encoders" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Encoders</NavLink>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <NavLink class="nav-link" href="/stazione-meteo/encoders/encoder-assoluto">Encoder assoluto</NavLink>
+                        <NavLink class="nav-link" href="/stazione-meteo/encoders/encoder-incrementale">Encoder incrementale</NavLink>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+@code {
+
+}

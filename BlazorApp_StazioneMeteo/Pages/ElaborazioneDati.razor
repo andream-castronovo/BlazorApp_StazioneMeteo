@@ -1,0 +1,70 @@
+﻿@page "/ElaborazioniDati"
+@using System.ComponentModel;
+@using BlazorApp_StazioneMeteo.Components
+
+<DataGrid @ref="tabella"
+    T="DatiEsempio"
+    Rows="@listaDati"
+    OnDelete="@EliminaRecord"
+    OnAdd="@AggiungiRecord"
+    OnSave="@SalvaModifiche"
+    OnRowSelected="@SelezionaRiga"/>
+
+<p>Riga selezionata: @rigaSelezionata</p>
+
+@code {
+    // Dati di esempio per la tabella.
+    List<DatiEsempio> listaDati = new List<DatiEsempio>
+    {
+        new DatiEsempio { Colonna1 = "Valore1", Colonna2 = "Valore2", Colonna3 = "Valore3" },
+        new DatiEsempio { Colonna1 = "Valore4", Colonna2 = "Valore5", Colonna3 = "Valore6" },
+        new DatiEsempio { Colonna1 = "Valore7", Colonna2 = "Valore8", Colonna3 = "Valore9" },
+    };
+
+    // Riferimento al componente DataGrid.
+    DataGrid<DatiEsempio> tabella;
+
+    // Riga selezionata.
+    int rigaSelezionata;
+    // Metodo invocato quando si seleziona una riga.
+    void SelezionaRiga(DatiEsempio riga)
+    {
+        rigaSelezionata = listaDati.IndexOf(riga);
+    }
+    // Metodo invocato quando si preme il pulsante di eliminazione.
+    void EliminaRecord(DatiEsempio record)
+    {
+        // ...
+    }
+    // Metodo invocato quando si preme il pulsante di aggiunta.
+    void AggiungiRecord(DatiEsempio record)
+    {
+        // ...
+    }
+    // Metodo invocato quando si preme il pulsante di salvataggio delle modifiche.
+    void SalvaModifiche(DatiEsempio record)
+    {
+        // ...
+    }
+
+    // Classe di esempio.
+    public class DatiEsempio
+    {
+        // Evitare che possano essere null per semplificare la
+        // gestione dei problemi di inserimento di un nuovo record.
+        [DisplayName("Colonna 1")]
+        public string Colonna1 { get; set; } = "";
+        [DisplayName("Colonna 2")]
+        public string Colonna2 { get; set; } = "";
+        [DisplayName("Colonna 3")]
+        public string Colonna3 { get; set; } = "";
+        // Utile per il DataGrid quando si vuole modificare un record
+        // per mantenerne una copia in caso poi si prema il pulsante annulla.
+        // La copia superficiale non copia gli oggetti referenziati ma solo i loro riferimenti.
+        public DatiEsempio ShallowCopy()
+        {
+            return (DatiEsempio)this.MemberwiseClone();
+        }
+    }
+}
+    

@@ -1,0 +1,30 @@
+﻿@page "/stazione-meteo/esterno/pluviometro"
+
+<section>
+    <h2>Pluviometro</h2>
+    <img class="img-fluid" src="imgs/pluviometro.jpg" alt="Pluviometro">
+    <div class="row">
+        <div class="col-xxl-6">
+            <img style="max-width: none;" class="img-fluid" src="imgs/pluviometro_scheme_1.jpg" alt="Pluviometro">
+        </div>
+        <div class="col-xxl-6">
+            <img style="max-width: none;" class="img-fluid" src="imgs/pluviometro_scheme_2.jpg" alt="Pluviometro">
+        </div>
+    </div>
+
+    <br>
+    
+    <p>
+        Le due foto rappresentano il funzionamento del Pluviometro ed è essenziale per capire l'output che riceviamo dal componente.
+        Come notiamo l'acqua entra da sopra (per questo c'è un imbuto), l'acqua si deposiderà in uno dei due lati, facendo pesare il lato
+        più dell'altro e quindi facendo pendere il sistema verso questo. All'oscillare del componente raffigurato in azzurro nelle due immagini,
+        possiamo notare come il magnete (segnato come "magnet" nelle immagini) coincida con il "reed switch", un circuito che quando il magnete è vicino
+        conduce elettricità, quando è lontano invece non conduce. Tramite questo alternarsi tra "conduce" e "non conduce" porta all'output "1" e "0"
+        (nel caso di resistenza pull-up: 0 quando c'è il magnete, 1 quando non c'è, vediamo meglio dopo).
+    </p>
+</section>
+
+
+@code {
+
+}
