@@ -140,7 +140,8 @@ body {
     background-color: #3498db;
 }
 
-.dropdown:hover > .dropdown-menu {
+.dropdown:hover > .dropdown-menu,
+:focus-within > .dropdown-menu {
     display: block;
 }
 
