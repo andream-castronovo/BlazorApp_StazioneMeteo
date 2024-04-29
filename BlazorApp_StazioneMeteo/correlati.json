@@ -1,0 +1,138 @@
+{
+    "/": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        },
+        {
+            "titolo": "Google",
+            "link": "https://google.it"
+        }
+    ],
+    "/info": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/rilevazioni": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/contatti": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/esterno": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/esterno/anemometro": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/esterno/banderuola": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/esterno/picam": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/esterno/proterigro": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/esterno/pluviometro": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/interno": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/interno/antirimbalzo": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/interno/batteria_cont": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/interno/picam": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/interno/raspberry": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/interno/reg_ten_in": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/interno/reg_ten_out": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/interno/ups": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/encoders": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/encoders/encoder_assoluto": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ],
+    "/stazione-meteo/encoders/encoder_incrementale": [
+        {
+            "titolo": "Wikipedia",
+            "link": "https://it.wikipedia.org/wiki/Francesco_Petrarca"
+        }
+    ]
+}

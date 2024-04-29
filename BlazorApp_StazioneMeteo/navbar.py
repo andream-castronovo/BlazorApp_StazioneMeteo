@@ -2,17 +2,15 @@
 
 
 def visit_children(node, prev_route = ""):
-    print(f"<li><NavLink class=\"nav-link\" href=\"{prev_route+node['route']}\">{node['name']}</NavLink></li>")
+    print(f"{prev_route+node['route']}")
     
     # Se il nodo ha figli
     if 'childs' in node and node['childs']:
-        print("<ul>")
         # Itera attraverso tutti i figli del nodo
         for child in node['childs']:
             # Stampa il nome e il percorso del figlio corrente
             # Chiamata ricorsiva per visitare i figli del figlio corrente
             visit_children(child, node['route'])
-        print("</ul>")
         
 data = [
   {

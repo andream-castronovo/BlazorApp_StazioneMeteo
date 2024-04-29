@@ -21,75 +21,75 @@
     "childs": [
       {
         "name": "Esterno",
-        "route": "/esterno",
+        "route": "/stazione-meteo/esterno",
         "childs": [
           {
             "name": "Anemometro",
-            "route": "/anemometro"
+            "route": "/stazione-meteo/esterno/anemometro"
           },
           {
             "name": "Banderuola",
-            "route": "/banderuola"
+            "route": "/stazione-meteo/esterno/banderuola"
           },
           {
             "name": "PiCam",
-            "route": "/picam"
+            "route": "/stazione-meteo/esterno/picam"
           },
           {
             "name": "IgrometroeTermometro",
-            "route": "/proterigro"
+            "route": "/stazione-meteo/esterno/proterigro"
           },
           {
             "name": "Pluviometro",
-            "route": "/pluviometro"
+            "route": "/stazione-meteo/esterno/pluviometro"
           }
         ]
       },
       {
         "name": "Interno",
-        "route": "/interno",
+        "route": "/stazione-meteo/interno",
         "childs": [
           {
             "name": "Antirimbalzo",
-            "route": "/antirimbalzo"
+            "route": "/stazione-meteo/interno/antirimbalzo"
           },
           {
             "name": "Batteria di continuit�",
-            "route": "/batteria_cont"
+            "route": "/stazione-meteo/interno/batteria_cont"
           },
           {
             "name": "PiCam",
-            "route": "/picam"
+            "route": "/stazione-meteo/interno/picam"
           },
           {
             "name": "Raspberry",
-            "route": "/raspberry"
+            "route": "/stazione-meteo/interno/raspberry"
           },
           {
             "name": "Regolatore tensione entrata",
-            "route": "/reg_ten_in"
+            "route": "/stazione-meteo/interno/reg_ten_in"
           },
           {
             "name": "Regolatore tensione uscita",
-            "route": "/reg_ten_out"
+            "route": "/stazione-meteo/interno/reg_ten_out"
           },
           {
             "name": "UPS",
-            "route": "/ups"
+            "route": "/stazione-meteo/interno/ups"
           }
         ]
       },
       {
         "name": "Encoders",
-        "route": "/encoders",
+        "route": "/stazione-meteo/encoders",
         "childs": [
           {
             "name": "Encoder assoluto",
-            "route": "/encoder_assoluto"
+            "route": "/stazione-meteo/encoders/encoder_assoluto"
           },
           {
             "name": "Encoderincrementale",
-            "route": "/encoder_incrementale"
+            "route": "/stazione-meteo/encoders/encoder_incrementale"
           }
         ]
       }

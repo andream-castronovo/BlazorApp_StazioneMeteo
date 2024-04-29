@@ -1,6 +1,12 @@
-﻿<h3>LinkUtili</h3>
-
-
+﻿
+<div>
+    <ul>
+        @foreach (var link in Links)
+        {
+            <li>@link</li>
+        }
+    </ul>
+</div>
 
 @code {
     [Parameter]
