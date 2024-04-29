@@ -1,4 +1,9 @@
-﻿using BlazorApp_StazioneMeteo.Components;
+﻿// Andrea Maria Castronovo
+// 5°I
+// 29-04-202
+// Progetto stazione meteo
+
+using BlazorApp_StazioneMeteo.Components;
 using BlazorApp_StazioneMeteo.Pages.ComponentiMeteo.Elettronica;
 using BlazorApp_StazioneMeteo.Pages.ComponentiMeteo.Encoders;
 using BlazorApp_StazioneMeteo.Pages.ComponentiMeteo.Esterno;

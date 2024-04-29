@@ -1,3 +1,8 @@
+// Andrea Maria Castronovo
+// 5°I
+// 29-04-202
+// Progetto stazione meteo
+
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
