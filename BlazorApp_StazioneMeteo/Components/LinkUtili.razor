@@ -7,9 +7,9 @@
 
 <div>
     <ul>
-        @foreach (var link in Links)
+        @foreach (Tuple<string,string> link in Links)
         {
-            <li>@link</li>
+            <li>@String.Concat(link.Item1, " ", link.Item2);</li>
         }
     </ul>
 </div>
@@ -18,11 +18,17 @@
     [Parameter]
     public string Parametri { get; set; }
 
-    private string[] Links { get; set; }
+    private List<Tuple<string, string>> Links { get; set; } = new List<Tuple<string, string>>(); // Links[0] = Nome 
 
+    
     protected override void OnParametersSet()
     {
-        Links = Parametri?.Split(';') ?? Array.Empty<string>();
+        string[] Couples = Parametri?.Split(';') ?? Array.Empty<string>();
+        foreach (var c in Couples)
+        {
+            string[] splitted = c.Split("$");
+            Links.Append(new Tuple<string, string>(splitted[0], splitted[1]));
+        }
     }
 
 }

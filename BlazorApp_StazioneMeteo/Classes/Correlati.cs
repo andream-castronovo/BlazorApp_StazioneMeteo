@@ -13,39 +13,34 @@ using System.Runtime.InteropServices;
 
 namespace BlazorApp_StazioneMeteo.Classes
 {
-    public class Correlati
+    static public class Correlati
     {
         // Se potessimo fare noi un database, sarebbe stato meglio fare una 
         // tabella con i link utili che si riferisca ad ogni pagina.
-        List<Tuple<string, string>> x = new List<Tuple<string, string>>
+        public static Dictionary<string, string> LinkUtili = new Dictionary<string, string>()
         {
-            new Tuple <string,string> ("Wikipedia","wikipedia.it")
-        }; 
-
-        Dictionary<string, string> _link = new Dictionary<string, string>()
-        {
-            {"/", ""},
-            {"/info", ""},
-            {"/rilevazioni", ""},
-            {"/contatti", ""},
-            {"/stazione-meteo", ""},
-            {"/stazione-meteo/esterno", ""},
-            {"/esterno/anemometro", ""},
-            {"/esterno/banderuola", ""},
-            {"/esterno/picam", ""},
-            {"/esterno/proterigro", ""},
-            {"/esterno/pluviometro", ""},
-            {"/stazione-meteo/interno", ""},
-            {"/interno/antirimbalzo", ""},
-            {"/interno/batteria_cont", ""},
-            {"/interno/picam", ""},
-            {"/interno/raspberry", ""},
-            {"/interno/reg_ten_in", ""},
-            {"/interno/reg_ten_out", ""},
-            {"/interno/ups", ""},
-            {"/stazione-meteo/encoders", ""},
-            {"/encoders/encoder_assoluto", ""},
-            {"/encoders/encoder_incrementale", ""},
+            {"/", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca;Google$https://google.it"},
+            {"/info", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/rilevazioni", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/contatti", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/esterno", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/esterno/anemometro", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/esterno/banderuola", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/esterno/picam", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/esterno/proterigro", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/esterno/pluviometro", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/interno", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/interno/antirimbalzo", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/interno/batteria_cont", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/interno/picam", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/interno/raspberry", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/interno/reg_ten_in", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/interno/reg_ten_out", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/interno/ups", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/encoders", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/encoders/encoder_assoluto", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/stazione-meteo/encoders/encoder_incrementale", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
         };
     }
 }

@@ -5,6 +5,8 @@
 // Progetto stazione meteo
 *@
 @inherits LayoutComponentBase
+@inject NavigationManager NM
+
 
 <div class="container-fluid">
 
@@ -19,12 +21,18 @@
 
     <div class="row">
         <main class="col-md-9 p-3">
-            @Body
+            <ErrorBoundary>
+                <ChildContent>
+                    @Body
+                </ChildContent>
+                <ErrorContent Context="ex">
+                    <p>Errore: @ex.Message</p>
+                </ErrorContent>
+            </ErrorBoundary>
         </main>
 
         <aside class="col-md-3 p-3">
-            <LinkUtili 
-                /> @*TODO: Dictionary *@
+            <LinkUtili Parametri="@Correlati.LinkUtili[Regex.Match(NM.Uri, @"\/([^\/].*)$").Value]" /> @*TODO: Dictionary *@
         </aside>
     </div>
 
