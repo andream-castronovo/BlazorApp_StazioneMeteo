@@ -6,6 +6,8 @@
 *@
 @page "/stazione-meteo/esterno/anemometro"
 
+@inject NavigationManager NM;
+
 <section>
     <h2>Cos'è</h2>
     <p>L'anemometro è un dispositivo tramite cui possiamo rilevare la forza del vento.</p>
@@ -14,7 +16,7 @@
 <section>
     <h2>Funzionamento</h2>
     <p>Questo dispositivo è composto da coppe che girano in base alla velocità con cui il vento sbatte su queste.</p>
-    <p>Assieme al movimento delle coppe, si muove con esse anche un mag nete, che andrà ad attivare e disattivare un <a href="#reedswitch">reed switch</a></p>
+    <p>Assieme al movimento delle coppe, si muove con esse anche un mag nete, che andrà ad attivare e disattivare un <a href="@NM.Uri" onclick="BlazorScrollToComponent('#reedswitch')">reed switch</a></p>
 </section>
 <section id="reedswitch">
     <h2>Reed Switch</h2>

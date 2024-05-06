@@ -30,10 +30,13 @@
                 </ErrorContent>
             </ErrorBoundary>
         </main>
-
-        <aside class="col-md-3 p-3">
-            <LinkUtili Parametri="@Correlati.LinkUtili[Regex.Match(NM.Uri, @"\/([^\/].*)$").Value]" /> @*TODO: Dictionary *@
-        </aside>
+        @if (@LinkCorrelati != "")
+        {
+            <aside class="col-md-3 p-3">
+                <LinkUtili 
+                    Parametri="@LinkCorrelati" />
+            </aside>
+        }
     </div>
 
     <div class="row">
@@ -43,3 +46,16 @@
     </div>
 
 </div>
+
+@code {
+    public string LinkCorrelati { get; set; } = "";
+
+    protected override void OnInitialized()
+    {
+        string path = NM.Uri.Substring(NM.Uri.IndexOf("/", 9));
+        
+        if (Correlati.LinkUtili.ContainsKey(path)) // Per evitare errore Dictionary
+            LinkCorrelati = Correlati.LinkUtili[path];
+    }
+
+}

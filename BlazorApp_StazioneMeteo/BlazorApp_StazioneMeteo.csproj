@@ -15,10 +15,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Components\ScrollTo.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
 	<Content Update="wwwroot\css\site.css">
 	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 	  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 	</Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Components\ScrollTo.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Components\ScrollTo.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\ScrollTo.razor" />
   </ItemGroup>
 
 </Project>

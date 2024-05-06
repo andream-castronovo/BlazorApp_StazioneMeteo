@@ -81,5 +81,18 @@
     <!-- Cookiealert plugin script -->
     <script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
     <script src="_framework/blazor.server.js"></script>
+    <script>
+        function BlazorScrollToId(id) {
+            const element = document.getElementById(id);
+            if (element instanceof HTMLElement) {
+                element.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                    inline: "nearest"
+                });
+            }
+        }
+    </script>
+
 </body>
 </html>

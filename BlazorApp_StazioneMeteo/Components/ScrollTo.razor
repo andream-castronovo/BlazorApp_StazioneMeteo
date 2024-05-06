@@ -1,0 +1,46 @@
+﻿@* Thanks to Nathan at https://stackoverflow.com/questions/75813694/localization-blazor-webassembly-does-not-work-if-navigation-anchor-in-present-on*@
+
+@* Per usare JavaScript*@
+@inject IJSRuntime JSRuntime 
+
+@* Per cambiare l'URL *@
+@inject NavigationManager NavigationManager
+
+@* Interfaccia per gestire cosa fare quando la risorsa è rilasciata *@
+@implements IDisposable
+
+@code {
+    protected override void OnInitialized()
+    {
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await ScrollToFragment();
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+
+    private async void OnLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        await ScrollToFragment();
+    }
+
+    private async Task ScrollToFragment()
+    {
+        var uri = new Uri(NavigationManager.Uri, UriKind.Absolute);
+        var fragment = uri.Fragment;
+        if (fragment.StartsWith('#'))
+        {
+            var elementId = fragment.Substring(1);
+            if (!string.IsNullOrEmpty(elementId))
+            {
+                await JSRuntime.InvokeVoidAsync("BlazorScrollToId", elementId);
+            }
+        }
+    }
+}
