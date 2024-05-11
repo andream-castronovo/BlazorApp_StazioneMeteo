@@ -1,7 +1,7 @@
 ﻿@*
 // Andrea Maria Castronovo
 // 5°I
-// 29-04-202
+// 11-05-2024
 // Progetto stazione meteo
 *@
 @inherits LayoutComponentBase
@@ -26,7 +26,12 @@
                     @Body
                 </ChildContent>
                 <ErrorContent Context="ex">
-                    <p>Errore: @ex.Message</p>
+                    <FinestraModale
+                        Titolo="Errore">
+                        <ChildContent>
+                            <p>Errore: @ex.Message</p>
+                        </ChildContent>
+                    </FinestraModale>
                 </ErrorContent>
             </ErrorBoundary>
         </main>

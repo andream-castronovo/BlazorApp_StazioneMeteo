@@ -1,14 +1,21 @@
 // Andrea Maria Castronovo
 // 5°I
-// 29-04-202
+// 11-05-2024
 // Progetto stazione meteo
 
+using BlazorApp_StazioneMeteo.Pages;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+
+// Aggiunto il servizio per poterlo usare nei componenti razor.
+var connectionString =
+builder.Configuration.GetValue<string>("ConnectionStrings:Northwind");
+builder.Services.AddScoped<Stazione>(
+sp => new Stazione(connectionString));
 
 var app = builder.Build();
 

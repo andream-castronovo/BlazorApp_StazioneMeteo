@@ -1,17 +1,17 @@
 ﻿@* 
 // Andrea Maria Castronovo
 // 5°I
-// 29-04-202
+// 11-05-2024
 // Progetto stazione meteo
 *@
 
 <Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        @*<FocusOnNavigate RouteData="@routeData" Selector="h1" />*@
     </Found>
     <NotFound>
-        <PageTitle>Not found</PageTitle>
+        <PageTitle>Pagina non trovata</PageTitle>
         <LayoutView Layout="@typeof(MainLayout)">
             <p role="alert">Errore 404: Non ho trovato nulla a questo indirizzo.</p>
         </LayoutView>
