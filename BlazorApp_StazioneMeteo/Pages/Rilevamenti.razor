@@ -1,0 +1,103 @@
+﻿@page "/rilevamenti"
+
+
+<h2>Rilevamenti</h2>
+<p>In questa pagina troverai i rilevamenti effettuati dalle nostre stazioni meteo.</p>
+
+<div>
+    <h1>@p</h1>
+    <div class="ricerca">
+        <input type="text" />
+        <button class="btn btn-secondary">
+            <i class="bi bi-funnel"/> 
+        </button>
+        <button class="btn btn-primary">
+            <i class="bi bi-search"/>
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table hover">
+            <thead>
+                <tr>
+                    <th scope="col">idRilevamenti</th>
+                    <th scope="col">idSensoriInstallati</th>
+                    <th scope="col">DataOra</th>
+                    <th scope="col">Dato</th>
+                    <th scope="col">Gestisci</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            @{
+                <tr>
+                    <td>@* @ril.idRilevamenti</td>
+                    <td>@ril.idSensoriInstallati</td>
+                    <td>@ril.DataOra</td>
+                    <td>@ril.Dato*@</td>
+                    <td>
+                        <button class="btn btn-primary">
+                            <NavLink >
+                                Dettagli
+                            </NavLink>
+                        </button>
+                        <button class="btn btn-danger">
+                            <NavLink>
+                                <i class="bi bi-trash"></i>
+                            </NavLink>
+                        </button>
+                    </td>
+                </tr>
+            }
+
+            <tr>
+                <td>
+                    <input type="text"/>
+                </td>
+                <td>
+                    <input type="text"/>
+                </td>
+                <td>
+                    <input type="text"/>
+                </td>
+                <td>
+                    <input type="text"/>
+                </td>
+                <td>
+                    <button class="btn btn-success">
+                        <NavLink>
+                            Crea
+                        </NavLink>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@inject RilevamentoDB R
+@inject SensoriInstallatiDB SI
+@code {
+    [Parameter, SupplyParameterFromQuery]
+    public int p { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (p < 1)
+            p = 1;
+
+
+        // var rils = R.OttieneRilevamenti();
+        // var sensIds = rils.Select((r) => r.idSensoriInstallati);
+        // var sens = SI.OttieneSensoriInstallati().Select((s) => sensIds.Contains(s.idSensoriInstallati));
+
+        // List<List<string>> l = new List<List<string>>();
+
+        // foreach (Repository.Models.Rilevamento ril in rils)
+        // {
+        //     l.Add()
+        // }
+    }
+
+}

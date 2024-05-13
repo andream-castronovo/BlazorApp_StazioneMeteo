@@ -6,16 +6,31 @@
 using BlazorApp_StazioneMeteo.Pages;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using BlazorApp_StazioneMeteo.Repository.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 // Aggiunto il servizio per poterlo usare nei componenti razor.
-var connectionString =
-builder.Configuration.GetValue<string>("ConnectionStrings:Northwind");
-builder.Services.AddScoped<Stazione>(
-sp => new Stazione(connectionString));
+var connectionString = builder.Configuration.GetValue<string>("ConnectionStrings:Meteo");
+
+builder.Services.AddScoped<StazioneDB>(
+    sp => new StazioneDB(connectionString)
+);
+builder.Services.AddScoped<RilevamentoDB>(
+    sp => new RilevamentoDB(connectionString)
+);
+builder.Services.AddScoped<GrandezzaFisicaDB>(
+    sp => new GrandezzaFisicaDB(connectionString)
+);
+builder.Services.AddScoped<SensoreDB>(
+    sp => new SensoreDB(connectionString)
+);
+builder.Services.AddScoped<SensoriInstallatiDB>(
+    sp => new SensoriInstallatiDB(connectionString)
+);
+
 
 var app = builder.Build();
 

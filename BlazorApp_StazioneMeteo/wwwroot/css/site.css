@@ -148,3 +148,7 @@ body {
 .dropdown-menu > .dropdown > .dropdown-menu {
     left: 40%
 }
+
+.table tbody tr:hover {
+    background-color: #3b3e41;
+}

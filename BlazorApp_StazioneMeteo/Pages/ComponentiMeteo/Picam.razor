@@ -8,12 +8,22 @@
 
 <section>
     <h1>PiCam</h1>
-    <p>Miao</p>
-    <p>@Parametro</p>
+    <p>La PiCam è il componente che si occupa di registrare immagini periodiche dalla nostra stazione meteorologica</p>
+
 </section>
 
+@inject NavigationManager NM
 @code {
+
     [Parameter]
     public string Parametro { get; set; }
-    
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (Parametro != "interno" || Parametro != "esterno")
+        {
+            NM.NavigateTo("/stazione-meteo/interno/picam");
+        }
+    }
+
 }
