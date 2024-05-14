@@ -50,9 +50,9 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                 conn.Open();
                 var cmd = new SqlCommand($@"
                     SELECT * FROM Rilevamenti 
-                    ORDER BY DataOra DESC
-                    OFFSET ({page - 1})*10 ROWS
-                    FETCH NEXT 10 ROWS ONLY;",
+                    ORDER BY DataOra DESC",
+                    //OFFSET ({page - 1})*10 ROWS
+                    //FETCH NEXT 10 ROWS ONLY;",
                     conn
                 );
                 var reader = cmd.ExecuteReader();
@@ -138,7 +138,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                     OFFSET ({page - 1})*10 ROWS
                     FETCH NEXT 10 ROWS ONLY;",
                     conn
-                );
+                );  
                 var reader = cmd.ExecuteReader();
                 var rilevamenti = new List<Rilevamento>();
                 while (reader.Read())

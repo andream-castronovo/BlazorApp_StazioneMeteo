@@ -152,3 +152,11 @@ body {
 .table tbody tr:hover {
     background-color: #3b3e41;
 }
+
+.deleting-row {
+    background-color: #bb2d3b;
+}
+
+    .table .deleting-row:hover {
+        background-color: #87242E;
+    }
