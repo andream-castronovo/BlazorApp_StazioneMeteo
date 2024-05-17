@@ -1,47 +1,44 @@
-﻿@page "/rilevamenti/dettagli/{id:int}"
+﻿@page "/sensori-installati/dettagli/{id:int}"
 @using BlazorApp_StazioneMeteo.Repository.Models
 
 
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Components.Forms
 
-<h2>Visualizza Rilevamento</h2>
+<h2>Modifica Sensore installato</h2>
 <EditForm Model="_gf" OnValidSubmit="Submit">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <label>
-        idRilevamenti
-        :
-        <InputNumber @bind-Value="_gf!.idRilevamenti" readonly />
-    </label>
-    <label>
         idSensoriInstallati
-        :
-        <InputNumber @bind-Value="_gf!.idSensoriInstallati" readonly />
+        <InputNumber @bind-Value="_gf!.idSensoriInstallati" />
     </label>
     <label>
-        DataOra
-        :
-        <InputDate @bind-Value="_gf!.DataOra" readonly />
+        idCodiceSensore
+        <InputNumber @bind-Value="_gf!.idCodiceSensore" />
     </label>
     <label>
-        Dato:
-        <InputText @bind-Value="_gf!.Dato" readonly />
+        idNomeStazione
+        <InputText @bind-Value="_gf!.idNomeStazione" />
     </label>
-    @* <button class="btn btn-primary" type="submit">Salva</button> *@
+    <label>
+        Note
+        <InputText @bind-Value="_gf!.Note" />
+    </label>
+    <button class="btn btn-primary" type="submit">Salva</button>
 </EditForm>
 
-<NavLink class="nav-link" href="/grandezze-fisiche">
+<NavLink class="nav-link" href="/sensori-installati">
     <span class="oi oi-media-step-backward" aria-hidden="true"></span> Torna all'elenco
 </NavLink>
 
-@inject RilevamentoDB GF
+@inject SensoriInstallatiDB GF
 
 @code {
     [Parameter]
     public int? id { get; set; }
 
-    private Rilevamento? _gf;
+    private SensoreInstallato? _gf;
 
     protected override void OnInitialized()
 

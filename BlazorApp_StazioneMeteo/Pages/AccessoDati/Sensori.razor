@@ -1,0 +1,35 @@
+﻿@page "/sensori"
+
+@using BlazorApp_StazioneMeteo.Repository.Models
+
+<h2>Sensori</h2>
+<p>In questa pagina troverai i sensori disponibili.</p>
+
+<div>
+    <div class="ricerca">
+        <input type="text" />
+        <button class="btn btn-secondary">
+            <i class="bi bi-funnel"/> 
+        </button>
+        <button class="btn btn-primary">
+            <i class="bi bi-search"/>
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <TabellaTiPregoFunziona G="Sensore" T="SensoreDB" _url="sensori" />
+        <NavLink href="/sensori/nuovo"><button class="btn btn-success">Nuovo</button></NavLink>
+    </div>
+</div>
+<p>Pagina @p</p>
+@code {
+    [Parameter, SupplyParameterFromQuery]
+    public int p { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (p < 1)
+            p = 1;
+    }
+
+}

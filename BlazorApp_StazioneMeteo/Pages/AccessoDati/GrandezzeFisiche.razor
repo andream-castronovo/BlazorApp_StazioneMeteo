@@ -1,0 +1,38 @@
+﻿@page "/grandezze-fisiche"
+
+@using BlazorApp_StazioneMeteo.Repository.Models
+@using Microsoft.AspNetCore.Components.Forms
+
+<h2>Grandezze fisiche</h2>
+<p>In questa pagina troverai i le grandezze fisiche disponbili.</p>
+
+<div>
+    
+    <div class="ricerca">
+        <input type="text" />
+        <button class="btn btn-secondary">
+            <i class="bi bi-funnel" />
+        </button>
+        <button class="btn btn-primary">
+            <i class="bi bi-search" />
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <TabellaTiPregoFunziona G="GrandezzaFisica" T="GrandezzaFisicaDB" _url="grandezze-fisiche"/>
+        <NavLink href="/grandezze-fisiche/nuovo"><button class="btn btn-success">Nuovo</button></NavLink>
+    </div>
+</div>
+<p>Pagina @p</p>
+
+@code {
+    [Parameter, SupplyParameterFromQuery]
+    public int p { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (p < 1)
+            p = 1;
+    }
+
+}

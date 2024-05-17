@@ -1,0 +1,55 @@
+﻿@page "/stazioni/nuovo"
+@using BlazorApp_StazioneMeteo.Repository.Models
+@using Microsoft.AspNetCore.Components.Forms
+
+<EditForm Model="_gf" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <label>
+        idNomeStazione
+        <InputText @bind-Value="_gf!.idNomeStazione" />
+    </label>
+    <label>
+        IP_Statico
+        <InputText @bind-Value="_gf!.IP_Statico" />
+
+    </label>
+    <label>
+        Localita_Indirizzo
+        <InputText @bind-Value="_gf!.Localita_Indirizzo" />
+    </label>
+    <label>
+        Latitudine
+        <InputNumber @bind-Value="_gf!.Latitudine" />
+    </label>
+    <label>
+        Longitudine
+        <InputNumber @bind-Value="_gf!.Longitudine" />
+    </label>
+    <label>
+        Altitudine
+        <InputNumber @bind-Value="_gf!.Altitudine" />
+    </label>
+    <label>
+        Descrizione
+        <InputText @bind-Value="_gf!.Descrizione" />
+    </label>
+    <label>
+        Note
+        <InputText @bind-Value="_gf!.Note" />
+    </label>
+    <button class="btn btn-primary" type="submit">Salva</button>
+</EditForm>
+
+@inject StazioneDB stdb
+@code {
+    StazioneModel _gf { get; set; } = new StazioneModel
+        {
+            idNomeStazione = "wdqsdqqubsuad"
+        };
+
+    void Submit()
+    {
+        stdb.CreaElemento(_gf);
+    }
+}

@@ -3,15 +3,16 @@ using BlazorApp_StazioneMeteo.Repository.Models;
 
 namespace BlazorApp_StazioneMeteo.Repository.Entities
 {
-    public class StazioneDB
+    public class StazioneDB : InterazioneDB<StazioneModel>
     {
-        private readonly string _conn;
-        public StazioneDB(string conn)
+        public StazioneDB(string conn) : base(conn)
         {
-            _conn = conn;
         }
-        public Stazione OttieneStazione(string id)
+
+        public override StazioneModel OttieniElemento(object idO)
         {
+            string id = ControllaPrimaryKey<string>(idO);
+
             using (var conn = new SqlConnection(_conn))
             {
                 conn.Open();
@@ -24,7 +25,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                 var reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    return new Stazione
+                    return new StazioneModel
                     {
                         idNomeStazione = (string)reader["idNomeStazione"],
                         Altitudine = (int)reader["Altitudine"],
@@ -39,32 +40,32 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                 return null;
             }
         }
-        public List<Stazione> OttieneStazioni()
+        public override List<StazioneModel> OttieniElementi()
         {
             using (var conn = new SqlConnection(_conn))
             {
                 conn.Open();
                 var cmd = new SqlCommand("SELECT * FROM Stazioni", conn);
                 var reader = cmd.ExecuteReader();
-                var customers = new List<Stazione>();
+                var customers = new List<StazioneModel>();
                 while (reader.Read())
                 {
-                    customers.Add(new Stazione
+                    customers.Add(new StazioneModel
                     {
                         idNomeStazione = (string)reader["idNomeStazione"],
-                        Altitudine = (int)reader["Altitudine"],
+                        Altitudine = reader["Altitudine"] == DBNull.Value ? null : (int)reader["Altitudine"],
                         IP_Statico = (string)reader["IP_Statico"],
                         Descrizione = (string)reader["Descrizione"],
-                        Latitudine = (decimal)reader["Latitudine"],
+                        Latitudine = reader["Latitudine"] == DBNull.Value ? null : (decimal)reader["Latitudine"],
                         Localita_Indirizzo = (string)reader["Localita_Indirizzo"],
-                        Longitudine = (decimal)reader["Longitudine"],
+                        Longitudine = reader["Longitudine"] == DBNull.Value ? null : (decimal)reader["Longitudine"],
                         Note = (string)reader["Note"]
                     });
                 }
                 return customers;
             }
         }
-        public void CreaStazione(Stazione customer)
+        public override void CreaElemento(StazioneModel customer)
         {
             using (var conn = new SqlConnection(_conn))
             {
@@ -88,7 +89,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                 cmd.ExecuteNonQuery();
             }
         }
-        public void ModificaStazione(Stazione customer)
+        public override void ModificaElemento(StazioneModel customer)
         {
             using (var conn = new SqlConnection(_conn))
             {
@@ -118,8 +119,9 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                 cmd.ExecuteNonQuery();
             }
         }
-        public void EliminaStazione(string id)
+        public override void EliminaElemento(object idO)
         {
+            string id = ControllaPrimaryKey<string>(idO);
             using (var conn = new SqlConnection(_conn))
             {
                 conn.Open();
@@ -128,5 +130,6 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                 cmd.ExecuteNonQuery();
             }
         }
+
     }
 }

@@ -3,17 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BlazorApp_StazioneMeteo.Repository.Models
 {
-    public class Sensore
+    public class Sensore : DefaultModel
     {
 
         [Required(ErrorMessage = "idNomeStazione non può essere omesso.")]
-        [StringLength(10, MinimumLength = 1, ErrorMessage = "idNomeStazione è obbligatorio e deve essere minore di 10 caratteri")]
-        public int idCodiceSensore { get; set; }
+        public int idCodiceSensore { get => (int)_id; set => _id = value; }
 
         [ForeignKey("GrandezzaFisica")]
         public int idGrandezzaFisica { get; set; }
 
-        public short Camera { get; set; }
+        public byte Camera { get; set; }
 
         [StringLength(30)]
         public string Nome { get; set; }

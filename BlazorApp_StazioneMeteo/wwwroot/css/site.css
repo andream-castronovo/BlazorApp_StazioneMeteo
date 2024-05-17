@@ -160,3 +160,13 @@ body {
     .table .deleting-row:hover {
         background-color: #87242E;
     }
+
+
+
+.modal.show .modal-dialog * {
+    color: black;
+}
+
+.modal.show .modal-dialog button {
+    color: white
+}

@@ -1,0 +1,39 @@
+﻿@page "/stazioni"
+
+@using BlazorApp_StazioneMeteo.Repository.Models
+
+<h2>Stazioni</h2>
+<p>In questa pagina troverai i le stazioni disponbili.</p>
+
+<div>
+    <div class="ricerca">
+        <input type="text" />
+        <button class="btn btn-secondary">
+            <i class="bi bi-funnel" />
+        </button>
+        <button class="btn btn-primary">
+            <i class="bi bi-search" />
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <TabellaTiPregoFunziona G="StazioneModel" T="StazioneDB" _url="stazioni" />
+        <NavLink href="/stazioni/nuovo"><button class="btn btn-success">Nuovo</button></NavLink>
+        <tr>
+
+        </tr>
+    </div>
+
+</div>
+<p>Pagina @p</p>
+@code {
+    [Parameter, SupplyParameterFromQuery]
+    public int p { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (p < 1)
+            p = 1;
+    }
+
+}

@@ -7,16 +7,16 @@ using BlazorApp_StazioneMeteo.Repository.Models;
 
 namespace BlazorApp_StazioneMeteo.Repository.Entities
 {
-    public class SensoreDB
+    public class SensoreDB : InterazioneDB<Sensore>
     {
-        private readonly string _conn;
-        public SensoreDB(string conn)
+        public SensoreDB(string conn) : base(conn)
         {
-            _conn = conn;
         }
 
-        public Sensore OttieneSensore(int id)
+        public override Sensore OttieniElemento(object idO)
+
         {
+            int id = ControllaPrimaryKey<int>(idO);
             using (var conn = new SqlConnection(_conn))
             {
                 conn.Open();
@@ -33,7 +33,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                     {
                         idCodiceSensore = (int)reader["idCodiceSensore"],
                         idGrandezzaFisica = (int)reader["idGrandezzaFisica"],
-                        Camera = (short)reader["Camera"],
+                        Camera = (byte)reader["Camera"],
                         Nome = reader["Nome"] == DBNull.Value ? null : (string)reader["Nome"],
                         Tipo = reader["Tipo"] == DBNull.Value ? null : (string)reader["Tipo"],
                         Caratteristiche = reader["Caratteristiche"] == DBNull.Value ? null : (string)reader["Caratteristiche"],
@@ -44,7 +44,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
             }
         }
 
-        public List<Sensore> OttieneSensori()
+        public override List<Sensore> OttieniElementi()
         {
             using (var conn = new SqlConnection(_conn))
             {
@@ -58,7 +58,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                     {
                         idCodiceSensore = (int)reader["idCodiceSensore"],
                         idGrandezzaFisica = (int)reader["idGrandezzaFisica"],
-                        Camera = (short)reader["Camera"],
+                        Camera = (byte)reader["Camera"],
                         Nome = reader["Nome"] == DBNull.Value ? null : (string)reader["Nome"],
                         Tipo = reader["Tipo"] == DBNull.Value ? null : (string)reader["Tipo"],
                         Caratteristiche = reader["Caratteristiche"] == DBNull.Value ? null : (string)reader["Caratteristiche"],
@@ -69,7 +69,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
             }
         }
 
-        public void CreaSensore(Sensore sensore)
+        public override void CreaElemento(Sensore sensore)
         {
             using (var conn = new SqlConnection(_conn))
             {
@@ -90,7 +90,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
             }
         }
 
-        public void ModificaSensore(Sensore sensore)
+        public override void ModificaElemento(Sensore sensore)
         {
             using (var conn = new SqlConnection(_conn))
             {
@@ -118,8 +118,9 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
             }
         }
 
-        public void EliminaSensore(int id)
+        public override void EliminaElemento(object idO)
         {
+            int id = ControllaPrimaryKey<int>(idO);
             using (var conn = new SqlConnection(_conn))
             {
                 conn.Open();

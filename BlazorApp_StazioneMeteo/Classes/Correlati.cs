@@ -21,7 +21,7 @@ namespace BlazorApp_StazioneMeteo.Classes
         {
             {"/", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca;Google$https://google.it"},
             {"/info", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
-            {"/rilevazioni", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
+            {"/rilevamenti", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
             {"/contatti", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
             {"/stazione-meteo", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},
             {"/stazione-meteo/esterno", "Wikipedia$https://it.wikipedia.org/wiki/Francesco_Petrarca"},

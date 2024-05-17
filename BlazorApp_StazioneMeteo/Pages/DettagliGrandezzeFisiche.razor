@@ -1,47 +1,48 @@
-﻿@page "/rilevamenti/dettagli/{id:int}"
+﻿@page "/grandezze-fisiche/dettagli/{id:int}"
 @using BlazorApp_StazioneMeteo.Repository.Models
 
 
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Components.Forms
 
-<h2>Visualizza Rilevamento</h2>
+<h2>Modifica Grandezza fisica </h2>
 <EditForm Model="_gf" OnValidSubmit="Submit">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <label>
-        idRilevamenti
-        :
-        <InputNumber @bind-Value="_gf!.idRilevamenti" readonly />
+        idGrandezzaFisica:
+        <InputNumber @bind-Value="_gf!.idGrandezzaFisica" readonly />
     </label>
     <label>
-        idSensoriInstallati
-        :
-        <InputNumber @bind-Value="_gf!.idSensoriInstallati" readonly />
+        GrandezzaFisica:
+        <InputText @bind-Value="_gf!.Nome"  />
     </label>
     <label>
-        DataOra
-        :
-        <InputDate @bind-Value="_gf!.DataOra" readonly />
+        Simbolo:
+        <InputText @bind-Value="_gf!.Simbolo"  />
     </label>
     <label>
-        Dato:
-        <InputText @bind-Value="_gf!.Dato" readonly />
+        SimboloUnitaDiMisuraAdottato:
+        <InputText @bind-Value="_gf!.SimboloUnitaDiMisuraAdottato"  />
     </label>
-    @* <button class="btn btn-primary" type="submit">Salva</button> *@
+    <label>
+        Note:
+        <InputText @bind-Value="_gf!.Note" />
+    </label>
+    <button class="btn btn-primary" type="submit">Salva</button>
 </EditForm>
 
 <NavLink class="nav-link" href="/grandezze-fisiche">
     <span class="oi oi-media-step-backward" aria-hidden="true"></span> Torna all'elenco
 </NavLink>
 
-@inject RilevamentoDB GF
+@inject GrandezzaFisicaDB GF
 
 @code {
     [Parameter]
     public int? id { get; set; }
 
-    private Rilevamento? _gf;
+    private GrandezzaFisica? _gf;
 
     protected override void OnInitialized()
 

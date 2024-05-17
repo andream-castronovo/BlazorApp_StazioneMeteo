@@ -1,0 +1,36 @@
+﻿@page "/rilevamenti"
+
+@using BlazorApp_StazioneMeteo.Repository.Models
+
+<h2>Rilevamenti</h2>
+<p>In questa pagina troverai i rilevamenti effettuati dalle nostre stazioni meteo.</p>
+
+<div>
+    <div class="ricerca">
+        <input type="text" />
+        <button class="btn btn-secondary">
+            <i class="bi bi-funnel"/> 
+        </button>
+        <button class="btn btn-primary">
+            <i class="bi bi-search"/>
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <TabellaTiPregoFunziona G="Rilevamento" T="RilevamentoDB" _url="rilevamenti">
+
+        </TabellaTiPregoFunziona>
+    </div>
+</div>
+<p>Pagina @p</p>
+@code {
+    [Parameter, SupplyParameterFromQuery]
+    public int p { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (p < 1)
+            p = 1;
+    }
+
+}

@@ -3,16 +3,16 @@ using BlazorApp_StazioneMeteo.Repository.Models;
 
 namespace BlazorApp_StazioneMeteo.Repository.Entities
 {
-    public class SensoriInstallatiDB
+    public class SensoriInstallatiDB : InterazioneDB<SensoreInstallato>
     {
-        private readonly string _conn;
-        public SensoriInstallatiDB(string conn)
+        public SensoriInstallatiDB(string conn) : base(conn)
         {
-            _conn = conn;
         }
 
-        public SensoreInstallato OttieneSensoriInstallati(int id)
+        public override SensoreInstallato OttieniElemento(object idO)
         {
+            int id = ControllaPrimaryKey<int>(idO);
+
             using (var conn = new SqlConnection(_conn))
             {
                 conn.Open();
@@ -37,7 +37,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
             }
         }
 
-        public List<SensoreInstallato> OttieneSensoriInstallati()
+        public override List<SensoreInstallato> OttieniElementi()
         {
             using (var conn = new SqlConnection(_conn))
             {
@@ -59,49 +59,53 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
             }
         }
 
-        public void CreaSensoriInstallati(SensoreInstallato sensoriInstallati)
+        public override void CreaElemento(SensoreInstallato sensoriInstallati)
         {
             using (var conn = new SqlConnection(_conn))
             {
                 conn.Open();
                 var cmd = new SqlCommand(@"
-                    INSERT INTO [SensoriInstallati] ([idSensoriInstallati], [idSensoriInstallati], [Note])
-                    VALUES (@idSensoriInstallati, @idSensoriInstallati, @Note)",
+                    INSERT INTO [SensoriInstallati] ([idCodiceSensore], [Note], [idNomeStazione])
+                    VALUES (@idCodiceSensore, @Note, @idNomeStazione)",
                     conn);
 
                 cmd.Parameters.AddWithValue("@idSensoriInstallati", sensoriInstallati.idSensoriInstallati);
                 // Se il campo idSensoriInstallati è anche una chiave esterna, verifica l'implementazione appropriata
-                cmd.Parameters.AddWithValue("@idSensoriInstallati", sensoriInstallati.idSensoriInstallati);
+                cmd.Parameters.AddWithValue("@idCodiceSensore", sensoriInstallati.idCodiceSensore);
+                cmd.Parameters.AddWithValue("@idNomeStazione", sensoriInstallati.idNomeStazione);
                 cmd.Parameters.AddWithValue("@Note", sensoriInstallati.Note ?? (object)DBNull.Value);
 
                 cmd.ExecuteNonQuery();
             }
         }
 
-        public void ModificaSensoriInstallati(SensoreInstallato sensoriInstallati)
+        public override void ModificaElemento(SensoreInstallato sensoriInstallati)
         {
             using (var conn = new SqlConnection(_conn))
             {
                 conn.Open();
                 var cmd = new SqlCommand(@"
                     UPDATE [dbo].[SensoriInstallati]
-                    SET [idSensoriInstallati] = @idSensoriInstallati,
-                        [idSensoriInstallati] = @idSensoriInstallati,
+                    SET [idCodiceSensore] = @idCodiceSensore,
+                        [idNomeStazione] = @idNomeStazione,
                         [Note] = @Note
                     WHERE idSensoriInstallati = @idSensoriInstallati",
                     conn);
 
                 cmd.Parameters.AddWithValue("@idSensoriInstallati", sensoriInstallati.idSensoriInstallati);
                 // Se il campo idSensoriInstallati è anche una chiave esterna, verifica l'implementazione appropriata
-                cmd.Parameters.AddWithValue("@idSensoriInstallati", sensoriInstallati.idSensoriInstallati);
+                cmd.Parameters.AddWithValue("@idCodiceSensore", sensoriInstallati.idCodiceSensore);
+                cmd.Parameters.AddWithValue("@idNomeStazione", sensoriInstallati.idNomeStazione);
                 cmd.Parameters.AddWithValue("@Note", sensoriInstallati.Note ?? (object)DBNull.Value);
 
                 cmd.ExecuteNonQuery();
             }
         }
 
-        public void EliminaSensoriInstallati(int id)
+        public override void EliminaElemento(object idO)
         {
+            int id = ControllaPrimaryKey<int>(idO);
+
             using (var conn = new SqlConnection(_conn))
             {
                 conn.Open();

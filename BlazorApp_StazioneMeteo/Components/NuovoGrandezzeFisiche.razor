@@ -1,0 +1,38 @@
+﻿@page "/grandezze-fisiche/nuovo"
+@using BlazorApp_StazioneMeteo.Repository.Models
+@using Microsoft.AspNetCore.Components.Forms
+
+<EditForm Model="_gf" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <label>
+        GrandezzaFisica:
+        <InputText @bind-Value="_gf!.Nome"  />
+    </label>
+    <label>
+        Simbolo:
+        <InputText @bind-Value="_gf!.Simbolo"  />
+    </label>
+    <label>
+        SimboloUnitaDiMisuraAdottato:
+        <InputText @bind-Value="_gf!.SimboloUnitaDiMisuraAdottato"  />
+    </label>
+    <label>
+        Note:
+        <InputText @bind-Value="_gf!.Note" />
+    </label>
+    <button class="btn btn-primary" type="submit">Salva</button>
+</EditForm>
+
+@inject GrandezzaFisicaDB gfdb
+@code {
+    GrandezzaFisica _gf { get; set; } = new GrandezzaFisica
+        {
+            idGrandezzaFisica = -1
+        };
+
+    void Submit()
+    {
+        gfdb.CreaElemento(_gf);
+    }
+}

@@ -1,0 +1,50 @@
+﻿@page "/sensori/nuovo"
+@using BlazorApp_StazioneMeteo.Repository.Models
+@using Microsoft.AspNetCore.Components.Forms
+
+<EditForm Model="_gf" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <label>
+        idCodiceSensore
+        <InputNumber @bind-Value="_gf!.idCodiceSensore" />
+    </label>
+    <label>
+        idGrandezzaFisica
+        <InputNumber @bind-Value="_gf!.idGrandezzaFisica" />
+    </label>
+    <label>
+        Camera
+        <InputNumber @bind-Value="_gf!.Camera" />
+    </label>
+    <label>
+        Nome
+        <InputText @bind-Value="_gf!.Nome" />
+    </label>
+    <label>
+        Tipo
+        <InputText @bind-Value="_gf!.Tipo" />
+    </label>
+    <label>
+        Caratteristiche
+        <InputText @bind-Value="_gf!.Caratteristiche" />
+    </label>
+    <label>
+        Note
+        <InputText @bind-Value="_gf!.Note" />
+    </label>
+    <button class="btn btn-primary" type="submit">Salva</button>
+</EditForm>
+
+@inject SensoreDB gfdb
+@code {
+    Sensore _gf { get; set; } = new Sensore
+        {
+            idGrandezzaFisica = -1
+        };
+
+    void Submit()
+    {
+        gfdb.CreaElemento(_gf);
+    }
+}

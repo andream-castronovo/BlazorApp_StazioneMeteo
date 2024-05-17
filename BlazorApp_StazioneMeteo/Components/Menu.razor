@@ -15,8 +15,15 @@
         <li class="nav-item">
             <NavLink class="nav-link" href="/info">Informazioni</NavLink>
         </li>
-        <li class="nav-item">
-            <NavLink class="nav-link" href="/rilevamenti">Rilevazioni</NavLink>
+        <li class="nav-item dropdown">
+            <NavLink class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tabelle</NavLink>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <NavLink class="dropdown-item nav-link" href="/rilevamenti">Rilevamenti</NavLink>
+                <NavLink class="dropdown-item nav-link" href="/stazioni">Stazioni</NavLink>
+                <NavLink class="dropdown-item nav-link" href="/grandezze-fisiche">Grandezze fisiche</NavLink>
+                <NavLink class="dropdown-item nav-link" href="/sensori">Sensori</NavLink>
+                <NavLink class="dropdown-item nav-link" href="/sensori-installati">Sensori Installati</NavLink>
+            </div>
         </li>
         <li class="nav-item">
             <NavLink class="nav-link" href="/contatti">Contatti</NavLink>

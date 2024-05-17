@@ -23,7 +23,7 @@ data = [
   },
   {
     "name": "Rilevazioni",
-    "route": "/rilevazioni"
+    "route": "/rilevamenti"
   },
   {
     "name": "Contatti",

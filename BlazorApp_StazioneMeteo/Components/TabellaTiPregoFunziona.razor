@@ -1,0 +1,78 @@
+﻿@using BlazorApp_StazioneMeteo.Repository.Models
+
+@using System.Reflection
+@using Microsoft.AspNetCore.Components.Forms
+@* G è il Modello *@
+@* G è l'entità che comunica col db*@
+@typeparam G where G : DefaultModel
+@typeparam T where T : InterazioneDB<G>
+
+@inject T miao
+
+<table class="table hover">
+    <thead>
+        <tr>
+            @foreach (PropertyInfo x in typeof(G).GetProperties())
+            {
+                <th>@x.Name</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (G ril in miao.OttieniElementi())
+        {
+            <tr class="@(_confirmDelete.Contains(ril._id) ? "deleting-row":"")">
+                @foreach (PropertyInfo x in typeof(G).GetProperties())
+                {
+                    <td>@x.GetValue(ril,null)</td>
+                }
+                
+                <td>
+                    <NavLink href="@String.Concat("/",_url,"/dettagli/",@ril._id)">
+                        <button class="btn btn-primary">
+                            Dettagli
+                        </button>
+                    </NavLink>
+
+                    @* <NavLink href="@String.Concat(@String.Concat("/",_url,"/elimina/",@ril.idRilevamenti)"> *@
+                    <button id="@ril._id" class="btn btn-danger" @onclick="@(() => {DeleteRecord(ril._id); })">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                    @* </NavLink> *@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@code {
+    [Parameter]
+    public string _url { get; set; }
+
+    private List<object> _confirmDelete = new List<object>();
+
+    private G newG { get; set; }
+
+    protected override void OnInitialized()
+    {
+    }
+
+    void DeleteRecord(object id)
+    {
+        if (_confirmDelete.Contains(id))
+        {
+            miao.EliminaElemento(id);
+            _confirmDelete.Remove(id);
+        }
+        else
+            _confirmDelete.Add(id);
+
+    }
+
+    void Submit()
+    {
+        miao.CreaElemento(newG);
+    }
+}

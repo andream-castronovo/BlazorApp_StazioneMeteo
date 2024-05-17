@@ -1,0 +1,69 @@
+﻿@page "/stazioni/dettagli/{id:int}"
+@using BlazorApp_StazioneMeteo.Repository.Models
+
+
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+
+<h2>Modifica Stazione</h2>
+<EditForm Model="_gf" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <label>
+        idNomeStazione
+        <InputText @bind-Value="_gf!.idNomeStazione" />
+    </label>
+    <label>
+        IP_Statico
+        <InputText @bind-Value="_gf!.IP_Statico" />
+
+    </label>
+    <label>
+        Localita_Indirizzo
+        <InputText @bind-Value="_gf!.Localita_Indirizzo" />
+    </label>
+    <label>
+        Latitudine
+        <InputNumber @bind-Value="_gf!.Latitudine" />
+    </label>
+    <label>
+        Longitudine
+        <InputNumber @bind-Value="_gf!.Longitudine" />
+    </label>
+    <label>
+        Altitudine
+        <InputNumber @bind-Value="_gf!.Altitudine" />
+    </label>
+    <label>
+        Descrizione
+        <InputText @bind-Value="_gf!.Descrizione" />
+    </label>
+    <label>
+        Note
+        <InputText @bind-Value="_gf!.Note" />
+    </label>
+    <button class="btn btn-primary" type="submit">Salva</button>
+</EditForm>
+
+<NavLink class="nav-link" href="/stazioni">
+    <span class="oi oi-media-step-backward" aria-hidden="true"></span> Torna all'elenco
+</NavLink>
+
+@inject StazioneDB GF
+
+@code {
+    [Parameter]
+    public int? id { get; set; }
+
+    private StazioneModel? _gf;
+
+    protected override void OnInitialized()
+
+    {
+        _gf = GF.OttieniElemento(id!);
+    }
+    private void Submit()
+    {
+        GF.ModificaElemento(_gf!);
+    }
+}

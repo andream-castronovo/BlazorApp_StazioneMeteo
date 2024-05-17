@@ -1,0 +1,66 @@
+﻿@page "/sensori/dettagli/{id:int}"
+@using BlazorApp_StazioneMeteo.Repository.Models
+
+
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Forms
+
+<h2>Modifica Sensore</h2>
+<EditForm Model="_gf" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <label>
+        idCodiceSensore
+        <InputNumber @bind-Value="_gf!.idCodiceSensore" />
+    </label>
+    <label>
+        idGrandezzaFisica
+        <InputNumber @bind-Value="_gf!.idGrandezzaFisica" />
+    </label>
+    <label>
+        Camera
+        <InputNumber @bind-Value="data" />
+    </label>
+    <label>
+        Nome
+        <InputText @bind-Value="_gf!.Nome" />
+    </label>
+    <label>
+        Tipo
+        <InputText @bind-Value="_gf!.Tipo" />
+    </label>
+    <label>
+        Caratteristiche
+        <InputText @bind-Value="_gf!.Caratteristiche" />
+    </label>
+    <label>
+        Note
+        <InputText @bind-Value="_gf!.Note" />
+    </label>
+    <button class="btn btn-primary" type="submit">Salva</button>
+</EditForm>
+
+<NavLink class="nav-link" href="/sensori">
+    <span class="oi oi-media-step-backward" aria-hidden="true"></span> Torna all'elenco
+</NavLink>
+
+@inject SensoreDB GF
+
+@code {
+    [Parameter]
+    public int? id { get; set; }
+
+    private Sensore? _gf;
+    private short data; 
+
+    protected override void OnInitialized()
+
+    {
+        _gf = GF.OttieniElemento(id!);
+    }
+    private void Submit()
+    {
+        _gf.Camera = (byte)data;
+        GF.ModificaElemento(_gf!);
+    }
+}
