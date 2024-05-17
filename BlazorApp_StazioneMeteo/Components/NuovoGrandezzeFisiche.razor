@@ -25,6 +25,8 @@
 </EditForm>
 
 @inject GrandezzaFisicaDB gfdb
+@inject NavigationManager NM
+
 @code {
     GrandezzaFisica _gf { get; set; } = new GrandezzaFisica
         {
@@ -34,5 +36,6 @@
     void Submit()
     {
         gfdb.CreaElemento(_gf);
+        NM.NavigateTo("/grandezze-fisiche");
     }
 }

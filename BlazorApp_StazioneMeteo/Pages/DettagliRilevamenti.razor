@@ -31,11 +31,12 @@
     @* <button class="btn btn-primary" type="submit">Salva</button> *@
 </EditForm>
 
-<NavLink class="nav-link" href="/grandezze-fisiche">
+<NavLink class="nav-link" href="/rilevamenti">
     <span class="oi oi-media-step-backward" aria-hidden="true"></span> Torna all'elenco
 </NavLink>
 
 @inject RilevamentoDB GF
+@inject NavigationManager NM
 
 @code {
     [Parameter]
@@ -50,6 +51,6 @@
     }
     private void Submit()
     {
-        GF.ModificaElemento(_gf!);
+        GF.ModificaElemento(_gf!);NM.NavigateTo("/rilevamenti");
     }
 }

@@ -23,6 +23,7 @@
     </label>
     <button class="btn btn-primary" type="submit">Salva</button>
 </EditForm>
+@inject NavigationManager NM
 
 @inject SensoriInstallatiDB gfdb
 @code {
@@ -33,6 +34,6 @@
 
     void Submit()
     {
-        gfdb.CreaElemento(_gf);
+        gfdb.CreaElemento(_gf); NM.NavigateTo("/sensori-installati");
     }
 }

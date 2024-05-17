@@ -37,6 +37,8 @@
 </EditForm>
 
 @inject SensoreDB gfdb
+@inject NavigationManager NM
+
 @code {
     Sensore _gf { get; set; } = new Sensore
         {
@@ -45,6 +47,6 @@
 
     void Submit()
     {
-        gfdb.CreaElemento(_gf);
+        gfdb.CreaElemento(_gf); NM.NavigateTo("/sensori");
     }
 }

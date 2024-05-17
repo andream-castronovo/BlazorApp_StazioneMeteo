@@ -37,6 +37,7 @@
 </NavLink>
 
 @inject GrandezzaFisicaDB GF
+@inject NavigationManager NM
 
 @code {
     [Parameter]
@@ -52,5 +53,6 @@
     private void Submit()
     {
         GF.ModificaElemento(_gf!);
+        NM.NavigateTo("/grandezze-fisiche");
     }
 }

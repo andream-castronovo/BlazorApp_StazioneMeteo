@@ -33,6 +33,7 @@
 </NavLink>
 
 @inject SensoriInstallatiDB GF
+@inject NavigationManager NM
 
 @code {
     [Parameter]
@@ -47,6 +48,6 @@
     }
     private void Submit()
     {
-        GF.ModificaElemento(_gf!);
+        GF.ModificaElemento(_gf!);NM.NavigateTo("/sensori-installati");
     }
 }

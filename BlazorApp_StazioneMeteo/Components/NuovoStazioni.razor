@@ -42,6 +42,8 @@
 </EditForm>
 
 @inject StazioneDB stdb
+@inject NavigationManager NM
+
 @code {
     StazioneModel _gf { get; set; } = new StazioneModel
         {
@@ -50,6 +52,6 @@
 
     void Submit()
     {
-        stdb.CreaElemento(_gf);
+        stdb.CreaElemento(_gf); NM.NavigateTo("/stazioni");
     }
 }

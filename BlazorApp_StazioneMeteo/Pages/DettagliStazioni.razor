@@ -50,7 +50,7 @@
 </NavLink>
 
 @inject StazioneDB GF
-
+@inject NavigationManager NM
 @code {
     [Parameter]
     public int? id { get; set; }
@@ -65,5 +65,6 @@
     private void Submit()
     {
         GF.ModificaElemento(_gf!);
+        NM.NavigateTo("/stazioni");
     }
 }

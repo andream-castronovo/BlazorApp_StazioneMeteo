@@ -45,6 +45,7 @@
 </NavLink>
 
 @inject SensoreDB GF
+@inject NavigationManager NM
 
 @code {
     [Parameter]
@@ -61,6 +62,6 @@
     private void Submit()
     {
         _gf.Camera = (byte)data;
-        GF.ModificaElemento(_gf!);
+        GF.ModificaElemento(_gf!);NM.NavigateTo("/sensori");
     }
 }
