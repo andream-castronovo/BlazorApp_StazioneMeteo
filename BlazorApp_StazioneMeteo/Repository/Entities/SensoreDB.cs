@@ -1,4 +1,9 @@
-﻿using System;
+﻿// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
@@ -32,7 +37,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                     return new Sensore
                     {
                         idCodiceSensore = (int)reader["idCodiceSensore"],
-                        idGrandezzaFisica = (int)reader["idGrandezzaFisica"],
+                        idGrandezzaFisica = reader["idGrandezzaFisica"] == DBNull.Value ? null : (int)reader["idGrandezzaFisica"],
                         Camera = (byte)reader["Camera"],
                         Nome = reader["Nome"] == DBNull.Value ? null : (string)reader["Nome"],
                         Tipo = reader["Tipo"] == DBNull.Value ? null : (string)reader["Tipo"],

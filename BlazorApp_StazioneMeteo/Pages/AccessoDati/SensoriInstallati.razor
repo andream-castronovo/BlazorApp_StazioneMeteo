@@ -1,10 +1,17 @@
-﻿@page "/sensori-installati"
+﻿@*
+// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+*@
+
+@page "/sensori-installati/{admin:int?}"
 
 @using BlazorApp_StazioneMeteo.Repository.Models
 
 <h2>Sensori Installati</h2>
 <p>In questa pagina troverai i sensori installati.</p>
-
+<PageTitle>Stazione Meteo | Sensori installati</PageTitle>
 <div>
     <div class="ricerca">
         <input type="text" />
@@ -17,19 +24,22 @@
     </div>
 
     <div class="table-responsive">
-        <TabellaTiPregoFunziona G="SensoreInstallato" T="SensoriInstallatiDB" _url="sensori-installati" />
+        <TabellaTiPregoFunziona G="SensoreInstallato" T="SensoriInstallatiDB" _url="sensori-installati" admin=@(admin == 0 ? false : true) />
         <NavLink href="/sensori-installati/nuovo"><button class="btn btn-success">Nuovo</button></NavLink>
     </div>
 </div>
-<p>Pagina @p</p>
 @code {
     [Parameter, SupplyParameterFromQuery]
     public int p { get; set; }
+    [Parameter]
+    public int? admin { get; set; }
 
     protected override void OnParametersSet()
     {
         if (p < 1)
             p = 1;
+        if (admin == null || admin > 1 || admin < 0)
+            admin = 0;
     }
 
 }

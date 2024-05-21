@@ -1,10 +1,17 @@
-﻿@page "/rilevamenti"
+﻿@*
+// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+*@
+
+@page "/rilevamenti/{admin:int?}"
 
 @using BlazorApp_StazioneMeteo.Repository.Models
 
 <h2>Rilevamenti</h2>
 <p>In questa pagina troverai i rilevamenti effettuati dalle nostre stazioni meteo.</p>
-
+<PageTitle>Stazione Meteo | Rilevamenti</PageTitle>
 <div>
     <div class="ricerca">
         <input type="text" />
@@ -17,18 +24,23 @@
     </div>
 
     <div class="table-responsive">
-        <TabellaTiPregoFunziona G="Rilevamento" T="RilevamentoDB" _url="rilevamenti">
+        <TabellaTiPregoFunziona G="Rilevamento" T="RilevamentoDB" _url="rilevamenti" admin=@(admin == 0 ? false : true)>
 
         </TabellaTiPregoFunziona>
     </div>
 </div>
-<p>Pagina @p</p>
 @code {
     [Parameter, SupplyParameterFromQuery]
     public int p { get; set; }
 
+    [Parameter]
+    public int? admin { get; set; }
+
     protected override void OnParametersSet()
     {
+         if (admin == null || admin > 1 || admin < 0)
+            admin = 0;
+
         if (p < 1)
             p = 1;
     }

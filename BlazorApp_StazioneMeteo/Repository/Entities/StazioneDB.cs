@@ -1,4 +1,12 @@
-﻿using System.Data.SqlClient;
+﻿
+// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+
+
+using System.Data.SqlClient;
+using System.Diagnostics;
 using BlazorApp_StazioneMeteo.Repository.Models;
 
 namespace BlazorApp_StazioneMeteo.Repository.Entities
@@ -27,14 +35,14 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                 {
                     return new StazioneModel
                     {
-                        idNomeStazione = (string)reader["idNomeStazione"],
-                        Altitudine = (int)reader["Altitudine"],
-                        IP_Statico = (string)reader["IP_Statico"],
-                        Descrizione = (string)reader["Descrizione"],
-                        Latitudine = (decimal)reader["Latitudine"],
-                        Localita_Indirizzo = (string)reader["Localita_Indirizzo"],
-                        Longitudine = (decimal)reader["Longitudine"],
-                        Note = (string)reader["Note"]
+                        idNomeStazione = reader["idNomeStazione"] == DBNull.Value ? null : (string)reader["idNomeStazione"],
+                        Altitudine = reader["Altitudine"] == DBNull.Value ? null : (int)reader["Altitudine"],
+                        IP_Statico = reader["IP_Statico"] == DBNull.Value ? null : (string)reader["IP_Statico"],
+                        Descrizione = reader["Descrizione"] == DBNull.Value ? null : (string)reader["Descrizione"],
+                        Latitudine = reader["Latitudine"] == DBNull.Value ? null : (decimal)reader["Latitudine"],
+                        Localita_Indirizzo = reader["Localita_Indirizzo"] == DBNull.Value ? null : (string)reader["Localita_Indirizzo"],
+                        Longitudine = reader["Longitudine"] == DBNull.Value ? null : (decimal)reader["Longitudine"],
+                        Note = reader["Note"] == DBNull.Value ? null : (string)reader["Note"]
                     };
                 }
                 return null;
@@ -52,14 +60,14 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                 {
                     customers.Add(new StazioneModel
                     {
-                        idNomeStazione = (string)reader["idNomeStazione"],
+                        idNomeStazione = reader["idNomeStazione"] == DBNull.Value ? null : (string)reader["idNomeStazione"],
                         Altitudine = reader["Altitudine"] == DBNull.Value ? null : (int)reader["Altitudine"],
-                        IP_Statico = (string)reader["IP_Statico"],
-                        Descrizione = (string)reader["Descrizione"],
+                        IP_Statico = reader["IP_Statico"] == DBNull.Value ? null : (string)reader["IP_Statico"],
+                        Descrizione = reader["Descrizione"] == DBNull.Value ? null : (string)reader["Descrizione"],
                         Latitudine = reader["Latitudine"] == DBNull.Value ? null : (decimal)reader["Latitudine"],
-                        Localita_Indirizzo = (string)reader["Localita_Indirizzo"],
+                        Localita_Indirizzo = reader["Localita_Indirizzo"] == DBNull.Value ? null : (string)reader["Localita_Indirizzo"],
                         Longitudine = reader["Longitudine"] == DBNull.Value ? null : (decimal)reader["Longitudine"],
-                        Note = (string)reader["Note"]
+                        Note = reader["Note"] == DBNull.Value ? null : (string)reader["Note"]
                     });
                 }
                 return customers;
@@ -77,14 +85,14 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                     conn
                 );
 
-                cmd.Parameters.AddWithValue("@idNomeStazione", customer.idNomeStazione);
-                cmd.Parameters.AddWithValue("@IP_Statico", customer.IP_Statico);
-                cmd.Parameters.AddWithValue("@Localita_Indirizzo", customer.Localita_Indirizzo);
-                cmd.Parameters.AddWithValue("@Latitudine", customer.Latitudine);
-                cmd.Parameters.AddWithValue("@Longitudine", customer.Longitudine);
-                cmd.Parameters.AddWithValue("@Altitudine", customer.Altitudine);
-                cmd.Parameters.AddWithValue("@Descrizione", customer.Descrizione);
-                cmd.Parameters.AddWithValue("@Note", customer.Note);
+                cmd.Parameters.AddWithValue("@idNomeStazione", customer.idNomeStazione == null ? DBNull.Value : customer.idNomeStazione);
+                cmd.Parameters.AddWithValue("@IP_Statico", customer.IP_Statico == null ? DBNull.Value : customer.IP_Statico);
+                cmd.Parameters.AddWithValue("@Localita_Indirizzo", customer.Localita_Indirizzo == null ? DBNull.Value : customer.Localita_Indirizzo);
+                cmd.Parameters.AddWithValue("@Latitudine", customer.Latitudine == null ? DBNull.Value : customer.Latitudine);
+                cmd.Parameters.AddWithValue("@Longitudine", customer.Longitudine == null ? DBNull.Value : customer.Longitudine);
+                cmd.Parameters.AddWithValue("@Altitudine", customer.Altitudine == null ? DBNull.Value : customer.Altitudine);
+                cmd.Parameters.AddWithValue("@Descrizione", customer.Descrizione == null ? DBNull.Value : customer.Descrizione);
+                cmd.Parameters.AddWithValue("@Note", customer.Note == null ? DBNull.Value : customer.Note);
 
                 cmd.ExecuteNonQuery();
             }
@@ -96,26 +104,27 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                 conn.Open();
                 var cmd = new SqlCommand(@"
                 UPDATE [dbo].[Stazioni]
-                   SET [idNomeStazione] = @idNomeStazione
-                      ,[IP_Statico] = @IP_Statico
+                   SET 
+                      [IP_Statico] = @IP_Statico
                       ,[Localita_Indirizzo] = @Localita_Indirizzo
-                      ,[Latitudine] = @Latitudine, decimal(8
-                      ,[Longitudine] = @Longitudine, decimal(8
+                      ,[Latitudine] = @Latitudine
+                      ,[Longitudine] = @Longitudine
                       ,[Altitudine] = @Altitudine
                       ,[Descrizione] = @Descrizione
                       ,[Note] = @Note
                  WHERE idNomeStazione = @idNomeStazione",
                 conn);
 
-                cmd.Parameters.AddWithValue("@idNomeStazione", customer.idNomeStazione);
-                cmd.Parameters.AddWithValue("@IP_Statico", customer.IP_Statico);
-                cmd.Parameters.AddWithValue("@Localita_Indirizzo", customer.Localita_Indirizzo);
-                cmd.Parameters.AddWithValue("@Latitudine", customer.Latitudine);
-                cmd.Parameters.AddWithValue("@Longitudine", customer.Longitudine);
-                cmd.Parameters.AddWithValue("@Altitudine", customer.Altitudine);
-                cmd.Parameters.AddWithValue("@Descrizione", customer.Descrizione);
-                cmd.Parameters.AddWithValue("@Note", customer.Note);
+                cmd.Parameters.AddWithValue("@idNomeStazione", customer.idNomeStazione ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@IP_Statico", customer.IP_Statico ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Localita_Indirizzo", customer.Localita_Indirizzo ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Latitudine", customer.Latitudine == null ? DBNull.Value : customer.Latitudine);
+                cmd.Parameters.AddWithValue("@Longitudine", customer.Longitudine ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Altitudine", customer.Altitudine ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Descrizione", customer.Descrizione ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Note", customer.Note ?? (object)DBNull.Value);
 
+                Debug.WriteLine(cmd.CommandText);
                 cmd.ExecuteNonQuery();
             }
         }

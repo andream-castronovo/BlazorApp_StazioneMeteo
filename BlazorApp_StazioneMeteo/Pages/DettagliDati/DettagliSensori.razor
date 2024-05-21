@@ -1,42 +1,44 @@
-﻿@page "/stazioni/dettagli/{id:int}"
+﻿@*
+// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+*@
+
+@page "/sensori/dettagli/{id:int}"
 @using BlazorApp_StazioneMeteo.Repository.Models
 
 
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Components.Forms
 
-<h2>Modifica Stazione</h2>
+<h2>Modifica Sensore</h2>
 <EditForm Model="_gf" OnValidSubmit="Submit">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <label>
-        idNomeStazione
-        <InputText @bind-Value="_gf!.idNomeStazione" />
+        idCodiceSensore
+        <InputNumber readonly @bind-Value="_gf!.idCodiceSensore" />
     </label>
     <label>
-        IP_Statico
-        <InputText @bind-Value="_gf!.IP_Statico" />
-
+        idGrandezzaFisica
+        <InputNumber @bind-Value="_gf!.idGrandezzaFisica" />
     </label>
     <label>
-        Localita_Indirizzo
-        <InputText @bind-Value="_gf!.Localita_Indirizzo" />
+        Camera
+        <InputNumber @bind-Value="data" />
     </label>
     <label>
-        Latitudine
-        <InputNumber @bind-Value="_gf!.Latitudine" />
+        Nome
+        <InputText @bind-Value="_gf!.Nome" />
     </label>
     <label>
-        Longitudine
-        <InputNumber @bind-Value="_gf!.Longitudine" />
+        Tipo
+        <InputText @bind-Value="_gf!.Tipo" />
     </label>
     <label>
-        Altitudine
-        <InputNumber @bind-Value="_gf!.Altitudine" />
-    </label>
-    <label>
-        Descrizione
-        <InputText @bind-Value="_gf!.Descrizione" />
+        Caratteristiche
+        <InputText @bind-Value="_gf!.Caratteristiche" />
     </label>
     <label>
         Note
@@ -45,17 +47,19 @@
     <button class="btn btn-primary" type="submit">Salva</button>
 </EditForm>
 
-<NavLink class="nav-link" href="/stazioni">
+<NavLink class="nav-link" href="/sensori">
     <span class="oi oi-media-step-backward" aria-hidden="true"></span> Torna all'elenco
 </NavLink>
 
-@inject StazioneDB GF
+@inject SensoreDB GF
 @inject NavigationManager NM
+
 @code {
     [Parameter]
     public int? id { get; set; }
 
-    private StazioneModel? _gf;
+    private Sensore _gf;
+    private short data; 
 
     protected override void OnInitialized()
 
@@ -64,7 +68,8 @@
     }
     private void Submit()
     {
+        _gf.Camera = (byte)data;
         GF.ModificaElemento(_gf!);
-        NM.NavigateTo("/stazioni");
+        NM.NavigateTo("/sensori");
     }
 }

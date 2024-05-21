@@ -1,10 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+
+
+using System.ComponentModel.DataAnnotations;
 
 namespace BlazorApp_StazioneMeteo.Repository.Models
 {
     public class GrandezzaFisica : DefaultModel
     {
-
+        [Key]
         [Required(ErrorMessage = "idGrandezzaFisica non può essere omesso.")]
         public int idGrandezzaFisica { 
             get => (int)_id; 

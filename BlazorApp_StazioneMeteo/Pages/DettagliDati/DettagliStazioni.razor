@@ -4,17 +4,22 @@
 // 11-05-2024
 // Progetto stazione meteo
 *@
-
-@page "/stazioni/nuovo"
+@page "/stazioni/dettagli/{id}"
 @using BlazorApp_StazioneMeteo.Repository.Models
+
+
+@using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Components.Forms
 
+<PageTitle>Stazione Meteo | Dettagli stazione</PageTitle>
+
+<h2>Dettagli e modifica Stazione</h2>
 <EditForm Model="_gf" OnValidSubmit="Submit">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <label>
         idNomeStazione
-        <InputText @bind-Value="_gf!.idNomeStazione" />
+        <InputText readonly @bind-Value="_gf!.idNomeStazione" />
     </label>
     <label>
         IP_Statico
@@ -48,17 +53,26 @@
     <button class="btn btn-primary" type="submit">Salva</button>
 </EditForm>
 
-@inject StazioneDB stdb
+<NavLink class="nav-link" href="/stazioni">
+    <span class="oi oi-media-step-backward" aria-hidden="true"></span> Torna all'elenco
+</NavLink>
+
+@inject StazioneDB GF
 @inject NavigationManager NM
-
 @code {
-    StazioneModel _gf { get; set; } = new StazioneModel
-        {
-            idNomeStazione = "wdqsdqqubsuad"
-        };
+    [Parameter]
+    public string id { get; set; }
 
-    void Submit()
+    private StazioneModel _gf;
+
+    protected override void OnInitialized()
+
     {
-        stdb.CreaElemento(_gf); NM.NavigateTo("/stazioni");
+        _gf = GF.OttieniElemento(id!);
+    }
+    private void Submit()
+    {
+        GF.ModificaElemento(_gf!);
+        NM.NavigateTo("/stazioni");
     }
 }

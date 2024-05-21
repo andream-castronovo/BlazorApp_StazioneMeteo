@@ -1,4 +1,8 @@
-﻿using BlazorApp_StazioneMeteo.Repository.Models;
+﻿// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+using BlazorApp_StazioneMeteo.Repository.Models;
 using System.Security.Principal;
 
 namespace BlazorApp_StazioneMeteo.Repository.Entities

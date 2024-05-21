@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
@@ -23,7 +27,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                     conn);
 
                 cmd.Parameters.AddWithValue("@idSensoriInstallati", rilevamento.idSensoriInstallati);
-                cmd.Parameters.AddWithValue("@DataOra", rilevamento.DataOra);
+                cmd.Parameters.AddWithValue("@DataOra", rilevamento.DataOra ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Dato", rilevamento.Dato ?? (object)DBNull.Value);
 
                 cmd.ExecuteNonQuery();
@@ -58,8 +62,8 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                     conn);
 
                 cmd.Parameters.AddWithValue("@idRilevamenti", rilevamento.idRilevamenti);
-                cmd.Parameters.AddWithValue("@idSensoriInstallati", rilevamento.idSensoriInstallati);
-                cmd.Parameters.AddWithValue("@DataOra", rilevamento.DataOra);
+                cmd.Parameters.AddWithValue("@idSensoriInstallati", rilevamento.idSensoriInstallati ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@DataOra", rilevamento.DataOra ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Dato", rilevamento.Dato ?? (object)DBNull.Value);
 
                 cmd.ExecuteNonQuery();

@@ -1,11 +1,18 @@
-﻿@page "/grandezze-fisiche"
+﻿@*
+// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+*@
+
+@page "/grandezze-fisiche/{admin:int?}"
 
 @using BlazorApp_StazioneMeteo.Repository.Models
 @using Microsoft.AspNetCore.Components.Forms
 
 <h2>Grandezze fisiche</h2>
 <p>In questa pagina troverai i le grandezze fisiche disponbili.</p>
-
+<PageTitle>Stazione Meteo | Grandezze fisiche</PageTitle>
 <div>
     
     <div class="ricerca">
@@ -19,18 +26,23 @@
     </div>
 
     <div class="table-responsive">
-        <TabellaTiPregoFunziona G="GrandezzaFisica" T="GrandezzaFisicaDB" _url="grandezze-fisiche"/>
+        <TabellaTiPregoFunziona G="GrandezzaFisica" T="GrandezzaFisicaDB" _url="grandezze-fisiche" admin=@(admin == 0 ? false : true)/>
         <NavLink href="/grandezze-fisiche/nuovo"><button class="btn btn-success">Nuovo</button></NavLink>
     </div>
 </div>
-<p>Pagina @p</p>
 
 @code {
     [Parameter, SupplyParameterFromQuery]
     public int p { get; set; }
 
+    [Parameter]
+    public int? admin { get; set; }
+
     protected override void OnParametersSet()
     {
+        if (admin == null || admin > 1 || admin < 0)
+            admin = 0;
+
         if (p < 1)
             p = 1;
     }

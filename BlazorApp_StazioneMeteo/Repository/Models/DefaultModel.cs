@@ -1,4 +1,9 @@
-﻿using System.Numerics;
+﻿// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+
+using System.Numerics;
 
 namespace BlazorApp_StazioneMeteo.Repository.Models
 {

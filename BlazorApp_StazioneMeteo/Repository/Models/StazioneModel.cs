@@ -1,9 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+using System.ComponentModel.DataAnnotations;
 
 namespace BlazorApp_StazioneMeteo.Repository.Models
 {
     public class StazioneModel : DefaultModel
     {
+        [Key]
         [Required(ErrorMessage = "idNomeStazione non può essere omesso.")]
         [StringLength(10, MinimumLength = 1, ErrorMessage = "idNomeStazione è obbligatorio e deve essere minore di 10 caratteri")]
         public string idNomeStazione { get => (string)_id; set => _id = value; }

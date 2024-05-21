@@ -1,4 +1,11 @@
-﻿@page "/rilevamenti/dettagli/{id:int}"
+﻿@*
+// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+*@
+
+@page "/rilevamenti/dettagli/{id:int}"
 @using BlazorApp_StazioneMeteo.Repository.Models
 
 
@@ -51,6 +58,8 @@
     }
     private void Submit()
     {
-        GF.ModificaElemento(_gf!);NM.NavigateTo("/rilevamenti");
+        GF.ModificaElemento(_gf!);
+        NM.NavigateTo("/rilevamenti");
+        
     }
 }

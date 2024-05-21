@@ -13,7 +13,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 // Aggiunto il servizio per poterlo usare nei componenti razor.
-var connectionString = builder.Configuration.GetValue<string>("ConnectionStrings:MeteoProf");
+var connectionString = builder.Configuration.GetValue<string>("ConnectionStrings:MeteoCasa");
 
 builder.Services.AddScoped<StazioneDB>(
     sp => new StazioneDB(connectionString)

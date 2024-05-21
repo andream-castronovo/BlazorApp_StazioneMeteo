@@ -1,4 +1,8 @@
-﻿using System.Data.SqlClient;
+﻿// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+using System.Data.SqlClient;
 using BlazorApp_StazioneMeteo.Repository.Models;
 
 namespace BlazorApp_StazioneMeteo.Repository.Entities
@@ -71,8 +75,8 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
 
                 cmd.Parameters.AddWithValue("@idSensoriInstallati", sensoriInstallati.idSensoriInstallati);
                 // Se il campo idSensoriInstallati è anche una chiave esterna, verifica l'implementazione appropriata
-                cmd.Parameters.AddWithValue("@idCodiceSensore", sensoriInstallati.idCodiceSensore);
-                cmd.Parameters.AddWithValue("@idNomeStazione", sensoriInstallati.idNomeStazione);
+                cmd.Parameters.AddWithValue("@idCodiceSensore", sensoriInstallati.idCodiceSensore ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@idNomeStazione", sensoriInstallati.idNomeStazione ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Note", sensoriInstallati.Note ?? (object)DBNull.Value);
 
                 cmd.ExecuteNonQuery();
@@ -94,8 +98,8 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
 
                 cmd.Parameters.AddWithValue("@idSensoriInstallati", sensoriInstallati.idSensoriInstallati);
                 // Se il campo idSensoriInstallati è anche una chiave esterna, verifica l'implementazione appropriata
-                cmd.Parameters.AddWithValue("@idCodiceSensore", sensoriInstallati.idCodiceSensore);
-                cmd.Parameters.AddWithValue("@idNomeStazione", sensoriInstallati.idNomeStazione);
+                cmd.Parameters.AddWithValue("@idCodiceSensore", sensoriInstallati.idCodiceSensore ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@idNomeStazione", sensoriInstallati.idNomeStazione ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Note", sensoriInstallati.Note ?? (object)DBNull.Value);
 
                 cmd.ExecuteNonQuery();

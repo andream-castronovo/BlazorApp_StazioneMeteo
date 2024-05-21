@@ -1,4 +1,10 @@
-﻿@page "/sensori-installati/dettagli/{id:int}"
+﻿@*
+// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+*@
+@page "/sensori-installati/dettagli/{id:int}"
 @using BlazorApp_StazioneMeteo.Repository.Models
 
 
@@ -11,7 +17,7 @@
     <ValidationSummary />
     <label>
         idSensoriInstallati
-        <InputNumber @bind-Value="_gf!.idSensoriInstallati" />
+        <InputNumber readonly @bind-Value="_gf!.idSensoriInstallati" />
     </label>
     <label>
         idCodiceSensore
@@ -48,6 +54,7 @@
     }
     private void Submit()
     {
-        GF.ModificaElemento(_gf!);NM.NavigateTo("/sensori-installati");
+        GF.ModificaElemento(_gf!);
+        NM.NavigateTo("/sensori-installati");
     }
 }

@@ -1,4 +1,10 @@
-﻿
+﻿@*
+// Andrea Maria Castronovo
+// 5°I
+// 11-05-2024
+// Progetto stazione meteo
+*@
+
 @using System.Reflection
 @using Microsoft.AspNetCore.Components.Forms
 
@@ -15,8 +21,16 @@
         <tr>
             @foreach (PropertyInfo x in typeof(G).GetProperties())
             {
-                <th>@x.Name</th>
+                if (x.GetCustomAttribute(typeof(System.ComponentModel.DataAnnotations.KeyAttribute), true) == null)
+                {
+                    <th>@x.Name</th>
+                }
+                else if (admin)
+                {
+                    <th>@x.Name</th>
+                }
             }
+            <th>Gestisci</th>
         </tr>
     </thead>
     <tbody>
@@ -26,7 +40,14 @@
             <tr class="@(_confirmDelete.Contains(ril._id) ? "deleting-row":"")">
                 @foreach (PropertyInfo x in typeof(G).GetProperties())
                 {
-                    <td>@x.GetValue(ril,null)</td>
+                    if (x.GetCustomAttribute(typeof(System.ComponentModel.DataAnnotations.KeyAttribute), true) == null)
+                    {
+                        <td>@x.GetValue(ril,null)</td>
+                    }
+                    else if (admin)
+                    {
+                        <td>@x.GetValue(ril, null)</td>
+                    }
                 }
                 
                 <td>
@@ -35,7 +56,6 @@
                             Dettagli
                         </button>
                     </NavLink>
-
                     @* <NavLink href="@String.Concat(@String.Concat("/",_url,"/elimina/",@ril.idRilevamenti)"> *@
                     <button id="@ril._id" class="btn btn-danger" @onclick="@(() => {DeleteRecord(ril._id); })">
                         <i class="bi bi-trash"></i>
@@ -51,6 +71,9 @@
 @code {
     [Parameter]
     public string _url { get; set; }
+
+    [Parameter]
+    public bool admin { get; set; }
 
     private List<object> _confirmDelete = new List<object>();
 

@@ -8,9 +8,12 @@
 <div>
     <h3>Link esterni</h3>
     <ul>
+        @{int i = 0;}
         @foreach (Tuple<string,string> link in Links)
         {
-            <li><a href="@link.Item2"> @link.Item1<sup>[n]</sup></a></li>
+            i++;
+            
+            <li><a href="@link.Item2"> @link.Item1<sup>[@i]</sup></a></li>
         }
     </ul>
 </div>
