@@ -32,8 +32,8 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                     return new SensoreInstallato
                     {
                         idSensoriInstallati = (int)reader["idSensoriInstallati"],
-                        idCodiceSensore = (int)reader["idCodiceSensore"],
-                        idNomeStazione = (string)reader["idNomeStazione"],
+                        idCodiceSensore = reader["idCodiceSensore"] == DBNull.Value ? null : (int)reader["idCodiceSensore"],
+                        idNomeStazione = reader["idNomeStazione"] == DBNull.Value ? null : (string)reader["idNomeStazione"],
                         Note = reader["Note"] == DBNull.Value ? null : (string)reader["Note"]
                     };
                 }
@@ -54,8 +54,8 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                     sensoriInstallati.Add(new SensoreInstallato
                     {
                         idSensoriInstallati = (int)reader["idSensoriInstallati"],
-                        idCodiceSensore = (int)reader["idCodiceSensore"],
-                        idNomeStazione = (string)reader["idNomeStazione"],
+                        idCodiceSensore = reader["idCodiceSensore"] == DBNull.Value ? null : (int)reader["idCodiceSensore"],
+                        idNomeStazione = reader["idNomeStazione"] == DBNull.Value ? null : (string)reader["idNomeStazione"],
                         Note = reader["Note"] == DBNull.Value ? null : (string)reader["Note"]
                     });
                 }
@@ -74,7 +74,6 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                     conn);
 
                 cmd.Parameters.AddWithValue("@idSensoriInstallati", sensoriInstallati.idSensoriInstallati);
-                // Se il campo idSensoriInstallati è anche una chiave esterna, verifica l'implementazione appropriata
                 cmd.Parameters.AddWithValue("@idCodiceSensore", sensoriInstallati.idCodiceSensore ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@idNomeStazione", sensoriInstallati.idNomeStazione ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Note", sensoriInstallati.Note ?? (object)DBNull.Value);
@@ -97,7 +96,6 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                     conn);
 
                 cmd.Parameters.AddWithValue("@idSensoriInstallati", sensoriInstallati.idSensoriInstallati);
-                // Se il campo idSensoriInstallati è anche una chiave esterna, verifica l'implementazione appropriata
                 cmd.Parameters.AddWithValue("@idCodiceSensore", sensoriInstallati.idCodiceSensore ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@idNomeStazione", sensoriInstallati.idNomeStazione ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Note", sensoriInstallati.Note ?? (object)DBNull.Value);

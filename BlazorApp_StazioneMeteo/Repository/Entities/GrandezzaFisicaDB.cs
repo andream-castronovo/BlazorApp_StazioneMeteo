@@ -100,7 +100,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                     conn);
 
                 cmd.Parameters.AddWithValue("@idGrandezzaFisica", grandezzaFisica.idGrandezzaFisica);
-                cmd.Parameters.AddWithValue("@GrandezzaFisica", grandezzaFisica.Nome ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Nome", grandezzaFisica.Nome ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Simbolo", grandezzaFisica.Simbolo ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@SimboloUnitaDiMisuraAdottato", grandezzaFisica.SimboloUnitaDiMisuraAdottato ?? (object)DBNull.Value);
                 cmd.Parameters.AddWithValue("@Note", grandezzaFisica.Note ?? (object)DBNull.Value);
