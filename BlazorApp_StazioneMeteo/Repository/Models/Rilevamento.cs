@@ -12,9 +12,9 @@ namespace BlazorApp_StazioneMeteo.Repository.Models
     {
         [Key]
         [Required(ErrorMessage = "idRilevamenti non può essere omesso.")]
-        public int idRilevamenti
+        public int? idRilevamenti
         {
-            get => (int)_id;
+            get => (int?)_id;
             set => _id = value;
         }
         [Key]

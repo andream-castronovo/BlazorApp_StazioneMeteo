@@ -12,7 +12,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Models
     {
         [Key]
         [Required(ErrorMessage = "idNomeStazione non può essere omesso.")]
-        public int idCodiceSensore { get => (int)_id; set => _id = value; }
+        public int? idCodiceSensore { get => (int?)_id; set => _id = value; }
         [Key]
         [ForeignKey("GrandezzaFisica")]
         public int? idGrandezzaFisica { get; set; }

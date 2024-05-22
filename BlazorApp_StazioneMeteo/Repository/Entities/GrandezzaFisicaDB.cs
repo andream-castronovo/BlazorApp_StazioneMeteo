@@ -23,7 +23,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                 conn.Open();
                 var cmd = new SqlCommand(
                     "SELECT * FROM GrandezzaFisica WHERE idGrandezzaFisica = @id",
-                    conn);
+                    conn).cmd;
 
                 cmd.Parameters.AddWithValue("@id", id);
 
@@ -48,8 +48,9 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
             using (var conn = new SqlConnection(_conn))
             {
                 conn.Open();
-                var cmd = new SqlCommand("SELECT * FROM GrandezzaFisica", conn);
-                var reader = cmd.ExecuteReader();
+                SqlCommand cmdH = new SqlCommand("SELECT * FROM GrandezzaFisica", conn);
+                //dynamic cmd = Convert.ChangeType(cmdH.cmd, cmdH.Tipo);
+                var reader = cmdH.ExecuteReader();
                 var grandezzeFisiche = new List<Models.GrandezzaFisica>();
                 while (reader.Read())
                 {
