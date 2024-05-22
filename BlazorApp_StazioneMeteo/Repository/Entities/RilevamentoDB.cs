@@ -1,6 +1,6 @@
 ﻿// Andrea Maria Castronovo
 // 5°I
-// 11-05-2024
+// 22-05-2024
 // Progetto stazione meteo
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,6 @@
 ﻿// Andrea Maria Castronovo
 // 5°I
-// 11-05-2024
+// 22-05-2024
 // Progetto stazione meteo
 
 using System.Data.SqlClient;
@@ -23,7 +23,7 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
                 conn.Open();
                 var cmd = new SqlCommand(
                     "SELECT * FROM GrandezzaFisica WHERE idGrandezzaFisica = @id",
-                    conn).cmd;
+                    conn);
 
                 cmd.Parameters.AddWithValue("@id", id);
 
