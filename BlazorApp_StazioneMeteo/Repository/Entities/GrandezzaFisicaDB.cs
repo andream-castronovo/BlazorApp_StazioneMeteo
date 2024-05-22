@@ -45,12 +45,14 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
 
         public List<GrandezzaFisica> OttieneGrandezzeFisiche()
         {
+            HandleSqlVersion.Type = "MySql";
+
             using (var conn = new SqlConnection(_conn))
             {
                 conn.Open();
-                SqlCommand cmdH = new SqlCommand("SELECT * FROM GrandezzaFisica", conn);
-                //dynamic cmd = Convert.ChangeType(cmdH.cmd, cmdH.Tipo);
-                var reader = cmdH.ExecuteReader();
+                SqlCommand2 cmdH = new SqlCommand2("SELECT * FROM GrandezzaFisica", conn);
+                dynamic cmd = Convert.ChangeType(cmdH.cmd, cmdH.Tipo);
+                var reader = cmd.ExecuteReader();
                 var grandezzeFisiche = new List<Models.GrandezzaFisica>();
                 while (reader.Read())
                 {
@@ -125,10 +127,14 @@ namespace BlazorApp_StazioneMeteo.Repository.Entities
 
         public override List<GrandezzaFisica> OttieniElementi()
         {
-            using (var conn = new SqlConnection(_conn))
+            HandleSqlVersion.Type = "MySql";
+
+            var conne = new SqlConnection2(_conn);
+            using (var conn = (dynamic)conne.con)
             {
                 conn.Open();
-                var cmd = new SqlCommand("SELECT * FROM GrandezzaFisica", conn);
+                SqlCommand2 cmdH = new SqlCommand2("SELECT * FROM GrandezzaFisica", conn);
+                dynamic cmd = Convert.ChangeType(cmdH.cmd, cmdH.Tipo);
                 var reader = cmd.ExecuteReader();
                 var grandezzeFisiche = new List<Models.GrandezzaFisica>();
                 while (reader.Read())
